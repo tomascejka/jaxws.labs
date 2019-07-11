@@ -1,4 +1,5 @@
-/*
+package cz.toce.learn.javaee.ws.simplest.client.impl;
+/**
  * <p>Tyto importy cz.toce.learn.javaee.ws.simplest.client.api.* jsou struktury, 
  * kt. vygeneroval wsimport, tzn. api, kt. vzeslo z vystaveného WSDL.</p>
  *
