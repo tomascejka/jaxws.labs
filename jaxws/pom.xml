@@ -6,6 +6,14 @@
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <name>jaxws.parent</name>
+    
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.ee.version>7.0</java.ee.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
     <build>
         <plugins>
             <plugin>
@@ -26,12 +34,6 @@
             </plugin>
         </plugins>
     </build>
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <java.ee.version>7.0</java.ee.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
   
     <modules>
         <module>jaxws.simplest</module>
