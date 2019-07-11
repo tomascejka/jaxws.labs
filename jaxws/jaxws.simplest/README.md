@@ -40,6 +40,7 @@ Web service is published and you can use eg. [soapui](https://www.soapui.org/) t
  * use [jdk 7] (https://openjdk.java.net/)
  * use [maven](https://maven.apache.org/) tool to create/manage java based project
  * use [com.airhack](https://mvnrepository.com/artifact/com.airhacks/javaee7-essentials-archetype) maven archetype for java ee 7 project
- * use [wsimport] (https://docs.oracle.com/javase/7/docs/technotes/tools/share/wsimport.html) native bundled script for generate soap based structures
+ * use [wsimport](https://docs.oracle.com/javase/7/docs/technotes/tools/share/wsimport.html) native bundled script for generate soap based structures
  * use [jaxws](https://docs.oracle.com/javase/7/docs/technotes/guides/xml/jax-ws/index.html) with jdk 7
  * use RCP style because be simply ([to think about RPC style](https://developer.ibm.com/articles/ws-whichwsdl/))
+ * use maven [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html) plugin for calling java class with main method
