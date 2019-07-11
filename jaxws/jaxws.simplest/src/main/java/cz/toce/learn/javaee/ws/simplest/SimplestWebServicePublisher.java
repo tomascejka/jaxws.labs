@@ -16,5 +16,10 @@ public class SimplestWebServicePublisher {
      */
     public static void main(String[] args) {
         Endpoint.publish(SERVICE_URL, new SimplestWebServiceImpl());
+        System.out.println("--");
+        System.out.println("WebService has been published at url: "+SERVICE_URL);
+        System.out.println("Published wsdl can be downloaded at url: "+SERVICE_URL+"?wsdl");
+        System.out.println("--");
+        System.out.println("... this thread/console will be blocked/publishing wsdl service");
     }
 }
