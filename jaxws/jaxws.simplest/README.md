@@ -33,7 +33,7 @@ mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.ws.simplest.client.impl.Sim
 
 ... and soap client write to output console "Hello Tomas !"
 
-### Other usage
+## Other usage
 Web service is published and you can use eg. [soapui](https://www.soapui.org/) tool to get WSDL at `http://localhost:8080/ws/SimplestWebService?wsdl` in order to write another testcase.
 
 ## Sources
