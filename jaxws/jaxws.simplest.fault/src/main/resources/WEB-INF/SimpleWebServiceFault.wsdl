@@ -56,25 +56,16 @@
     
     <!-- Bindings -->
     <binding name="SimpleWebServiceFaultBindingSoap12Http" type="tns:SimpleWebServiceFaultPortType">
-        <!-- viz. odkazy:
-         * https://www.w3.org/Submission/wsdl11soap12/#introduction 
-         * https://www.glenmazza.net/blog/entry/switch-soap11-to-soap12
-        -->
         <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <!--soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/-->
         <operation name="helloMessage">
             <soap12:operation style="document" soapActionRequired="false"/>
-            <!--soap:operation style="document" soapAction="http://javaee.learn.toce.cz/jaxws/simplest/fault/api/HelloMessageRequest" /-->
             <input name="input1"><!-- ukazuje na portType/operation/input[@name]-->
-                <!--soap:body use="literal"/-->
                 <soap12:body use="literal"/>
             </input>
             <output name="output1"><!-- ukazuje na portType/operation/output[@name]-->
-                <!--soap:body use="literal"/-->
                 <soap12:body use="literal"/>
             </output>
             <fault name="internalErrorException"><!-- ukazuje na portType/operation/fault[@name]-->
-                <!--soap:fault use="literal" name="internalErrorException"/-->
                 <soap12:fault use="literal" name="internalErrorException"/>
             </fault>
         </operation>
@@ -84,7 +75,6 @@
     <service name="SimpleWebServiceFault">
         <documentation>Simplest soap fault web service example - to demonstrated soap fault behaviour</documentation>
         <port name="SimpleWebServiceFaultSoap12Http" binding="tns:SimpleWebServiceFaultBindingSoap12Http"><!-- ukazuje na binding[@name]-->
-            <!--soap:address location="http://localhost:8080/ws/simplest/fault"/-->
             <soap12:address location="http://localhost:8080/ws/simplest/fault"/>
         </port>
     </service>
