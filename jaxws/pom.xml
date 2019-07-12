@@ -4,7 +4,7 @@
     <groupId>cz.toce.learn.javaee</groupId>
     <artifactId>jaxws.parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>jaxws.parent</name>
     
     <properties>
@@ -37,5 +37,6 @@
   
     <modules>
         <module>jaxws.simplest</module>
+        <module>jaxws.simplest.fault</module>
     </modules>
 </project>

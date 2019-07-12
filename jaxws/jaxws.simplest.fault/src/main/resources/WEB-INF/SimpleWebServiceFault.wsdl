@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="SimpleFaultWsdl" targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz"
+             xmlns:tns="http://api.fault.simplest.jaxws.javaee.learn.toce.cz"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl">
+    <!-- Types: via XSD-->
+    <types>
+        <xsd:schema targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz" elementFormDefault="qualified"><!-- http://javaee.learn.toce.cz/jaxws/simplest/fault/api -->
+            <xsd:element name="HelloRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="greetings" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="HelloResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="resultCode" type="xsd:string"/>
+                        <xsd:element name="resultText" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="InternalErrorException">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+    
+    <!-- Messages -->
+    <message name="HelloMessageRequestIn">
+        <part name="parameters" element="tns:HelloRequest"/>
+    </message>
+    <message name="HelloMessageResponseOut">
+        <part name="parameters" element="tns:HelloResponse"/>
+    </message>
+    <message name="InternalErrorExceptionFault">
+        <part name="fault" element="tns:InternalErrorException"/>
+    </message>    
+    
+    <!-- Ports -->
+    <portType name="SimpleWebServiceFaultPortType">
+        <operation name="helloMessage">
+            <input name="input1" message="tns:HelloMessageRequestIn"/>
+            <output name="output1" message="tns:HelloMessageResponseOut"/>
+            <fault name="internalErrorException" message="tns:InternalErrorExceptionFault"/>
+        </operation>
+    </portType>
+    
+    <!-- Bindings -->
+    <binding name="SimpleWebServiceFaultBindingSoap12Http" type="tns:SimpleWebServiceFaultPortType">
+        <!-- viz. odkazy:
+         * https://www.w3.org/Submission/wsdl11soap12/#introduction 
+         * https://www.glenmazza.net/blog/entry/switch-soap11-to-soap12
+        -->
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <!--soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/-->
+        <operation name="helloMessage">
+            <soap12:operation style="document" soapActionRequired="false"/>
+            <!--soap:operation style="document" soapAction="http://javaee.learn.toce.cz/jaxws/simplest/fault/api/HelloMessageRequest" /-->
+            <input name="input1"><!-- ukazuje na portType/operation/input[@name]-->
+                <!--soap:body use="literal"/-->
+                <soap12:body use="literal"/>
+            </input>
+            <output name="output1"><!-- ukazuje na portType/operation/output[@name]-->
+                <!--soap:body use="literal"/-->
+                <soap12:body use="literal"/>
+            </output>
+            <fault name="internalErrorException"><!-- ukazuje na portType/operation/fault[@name]-->
+                <!--soap:fault use="literal" name="internalErrorException"/-->
+                <soap12:fault use="literal" name="internalErrorException"/>
+            </fault>
+        </operation>
+    </binding>
+    
+    <!-- Services -->
+    <service name="SimpleWebServiceFault">
+        <documentation>Simplest soap fault web service example - to demonstrated soap fault behaviour</documentation>
+        <port name="SimpleWebServiceFaultSoap12Http" binding="tns:SimpleWebServiceFaultBindingSoap12Http"><!-- ukazuje na binding[@name]-->
+            <!--soap:address location="http://localhost:8080/ws/simplest/fault"/-->
+            <soap12:address location="http://localhost:8080/ws/simplest/fault"/>
+        </port>
+    </service>
+</definitions>
