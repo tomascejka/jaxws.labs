@@ -73,3 +73,52 @@ public class WebServiceClient {
     }
 }
 ```
+
+## Jak projekt použít/spustit
+Naklonuj si příslušný adresář via git a přesuň se do root adresáře projektu.
+
+### Build project
+Používám maven, takže v příslušném modulu (více modulový projekt v maven terminologii) spusť tento příkaz:
+
+```
+mvn clean package
+``` 
+
+### Publikování endpoint-u
+Pro publikování WSDL via ([Endpoint](https://docs.oracle.com/javase/7/docs/api/javax/xml/ws/Endpoint.html)) používám nativní JDK chování/nástroj a poté jsem schopen spustit zbuildovanou/zkompilovanou třídu ([WebServicePublisher.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/fault/server/WebServicePublisher.java)), který vystaví WSDL na adrese = `http://localhost:8080/ws/SimpleWebService`. Pro spuštění použiji maven plugin [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html) - spuštění je blokující, takže tento skript spouštím ve svém vlastním okně (v tomto případě pomocí Windows CMD/Batch příkazu: `start call ...`):
+
+```
+start call mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.jaxws.simplest.fault.server.WebServicePublisher"
+```
+
+### Spuštění klienta
+Pro spuštění na klientské straně - použiji opět předkompilovanou třídu ([WebServiceClient.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/client/impl/WebServiceClient.java))(připravenou ve stejném projektu,pouze pro jednoduchost, v praxi by byla klientská implementace v jiném projektu) a opět ji zavolám pomocí maven pluginu [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html):
+
+```
+mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.jaxws.simplest.fault.client.WebServiceClient"
+```
+
+Výstupem je výpis z konsole, že je vrácen soap fault (v1.2). viz níže:
+
+<pre>
+[INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ jaxws.simplest.fault ---
+[WARNING]
+com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fault from server: Not supported yet. Please see the server log to find more detail regarding exact cause of the failure.
+        at com.sun.xml.internal.ws.fault.SOAP12Fault.getProtocolException(SOAP12Fault.java:214)
+        at com.sun.xml.internal.ws.fault.SOAPFaultBuilder.createException(SOAPFaultBuilder.java:116)
+        at com.sun.xml.internal.ws.client.sei.StubHandler.readResponse(StubHandler.java:238)
+        at com.sun.xml.internal.ws.db.DatabindingImpl.deserializeResponse(DatabindingImpl.java:189)
+        at com.sun.xml.internal.ws.db.DatabindingImpl.deserializeResponse(DatabindingImpl.java:276)
+        at com.sun.xml.internal.ws.client.sei.SyncMethodHandler.invoke(SyncMethodHandler.java:104)
+        at com.sun.xml.internal.ws.client.sei.SyncMethodHandler.invoke(SyncMethodHandler.java:77)
+        at com.sun.xml.internal.ws.client.sei.SEIStub.invoke(SEIStub.java:147)
+        at com.sun.proxy.$Proxy51.helloMessage(Unknown Source)
+        at cz.toce.learn.javaee.jaxws.simplest.fault.client.WebServiceClient.main(WebServiceClient.java:65)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:282)
+        at java.lang.Thread.run(Thread.java:748)
+[INFO] ------------------------------------------------------------------------
+</pre>
