@@ -8,7 +8,7 @@
              xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl">
     <!-- Types: via XSD-->
     <types>
-        <xsd:schema targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz" elementFormDefault="qualified"><!-- http://javaee.learn.toce.cz/jaxws/simplest/fault/api -->
+        <xsd:schema targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz" elementFormDefault="qualified">
             <xsd:element name="HelloRequest">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -58,7 +58,7 @@
     <binding name="SimpleWebServiceFaultBindingSoap12Http" type="tns:SimpleWebServiceFaultPortType">
         <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="helloMessage">
-            <soap12:operation style="document" soapActionRequired="false"/>
+            <soap12:operation style="document" soapAction="" soapActionRequired="false"/>
             <input name="input1"><!-- ukazuje na portType/operation/input[@name]-->
                 <soap12:body use="literal"/>
             </input>
