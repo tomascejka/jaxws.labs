@@ -57,8 +57,11 @@ public class WebServiceClient {
         // --  tzn. uz pri psani SEI tyto hodnoty znam a nemusim generovat klient tridu abych ji zjistil!
         // --  ... pak tedy lze napsat soap klienta takto:
         // --  
+        // -- Sestavení klienta na 2 řádky << RESULT, minimalistický přístup
         SimpleWebServiceFault s = new SimpleWebServiceFault(wsdlLocation);
         SimpleWebServiceFaultPortType p = s.getSimpleWebServiceFaultSoap12Http();
+        
+        // -- Volani serverové časti
         System.out.println(p.helloMessage(request).getResultText());
         
     }
