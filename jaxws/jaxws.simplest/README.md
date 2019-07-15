@@ -18,17 +18,17 @@ mvn clean package
 ``` 
 
 ### Publish endpoint
-I use native jdk behaviour ([Endpoint](https://docs.oracle.com/javase/7/docs/api/javax/xml/ws/Endpoint.html)) and run already builded/compiled class ([SimplestWebServicePublisher.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/SimplestWebServicePublisher.java)) which it publishes web service api at url = `http://localhost:8080/ws/SimplestWebService`. I use maven plugin [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html) for execute precompiled java class (because publishing web service is blocking - open new console window via combination commands(windows batch): `start call ...`):
+I use native jdk behaviour ([Endpoint](https://docs.oracle.com/javase/7/docs/api/javax/xml/ws/Endpoint.html)) and run already builded/compiled class ([WebServicePublisher.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/server/WebServicePublisher.java)) which it publishes web service api at url = `http://localhost:8080/ws/SimplestWebService`. I use maven plugin [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html) for execute precompiled java class (because publishing web service is blocking - open new console window via combination commands(windows batch): `start call ...`):
 
 ```
-start call mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.ws.simplest.SimplestWebServicePublisher"
+start call mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.ws.simplest.server.WebServicePublisher"
 ```
 
 ### Run client
-Use same approach - use precompiled java class ([SimplestWebServiceClient.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/client/impl/SimplestWebServiceClient.java))(bundled in same project for easily presentation) and call one via maven [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html) plugin.
+Use same approach - use precompiled java class ([WebServiceClient.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/client/WebServiceClient.java))(bundled in same project for easily presentation) and call one via maven [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html) plugin.
 
 ```
-mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.ws.simplest.client.impl.SimplestWebServiceClient"
+mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.ws.simplest.client.WebServiceClient"
 ```
 
 ... and soap client write to output console "Hello Tomas !", see below to windows batch output:

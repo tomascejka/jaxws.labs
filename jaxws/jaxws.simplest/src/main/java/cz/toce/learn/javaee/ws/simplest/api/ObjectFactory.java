@@ -1,5 +1,5 @@
 
-package cz.toce.learn.javaee.ws.simplest.client.api;
+package cz.toce.learn.javaee.ws.simplest.api;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the cz.toce.learn.javaee.ws.simplest.client.api package. 
+ * generated in the cz.toce.learn.javaee.ws.simplest.api package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -24,11 +24,11 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Hello_QNAME = new QName("http://simplest.ws.javaee.learn.toce.cz/client/api", "hello");
-    private final static QName _HelloResponse_QNAME = new QName("http://simplest.ws.javaee.learn.toce.cz/client/api", "helloResponse");
+    private final static QName _Hello_QNAME = new QName("http://api.simplest.ws.javaee.learn.toce.cz", "hello");
+    private final static QName _HelloResponse_QNAME = new QName("http://api.simplest.ws.javaee.learn.toce.cz", "helloResponse");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.toce.learn.javaee.ws.simplest.client.api
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.toce.learn.javaee.ws.simplest.api
      * 
      */
     public ObjectFactory() {
@@ -54,7 +54,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link Hello }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://simplest.ws.javaee.learn.toce.cz/client/api", name = "hello")
+    @XmlElementDecl(namespace = "http://api.simplest.ws.javaee.learn.toce.cz", name = "hello")
     public JAXBElement<Hello> createHello(Hello value) {
         return new JAXBElement<Hello>(_Hello_QNAME, Hello.class, null, value);
     }
@@ -63,7 +63,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link HelloResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://simplest.ws.javaee.learn.toce.cz/client/api", name = "helloResponse")
+    @XmlElementDecl(namespace = "http://api.simplest.ws.javaee.learn.toce.cz", name = "helloResponse")
     public JAXBElement<HelloResponse> createHelloResponse(HelloResponse value) {
         return new JAXBElement<HelloResponse>(_HelloResponse_QNAME, HelloResponse.class, null, value);
     }
