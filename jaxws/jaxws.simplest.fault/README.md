@@ -60,4 +60,16 @@ Stačí použít anotaci [WebService](https://docs.oracle.com/javaee/7/api/javax
  * targetNamespace, viz. `/definitions[@targetNamespace]`
  * endpointInterface (celá package cesta, tzn. targetNamespace+name), a name zjistim viz. `/definitions/portType[@name]`
 
-... pozn: všechny xml cesty výše uvedené platí pro názvosloví praktikované/používané v [WSDL 1.1](https://www.w3.org/TR/wsdl.html#_introduction).
+... pozn: všechny xml cesty výše uvedené platí pro názvosloví praktikované/používané v [WSDL 1.1](https://www.w3.org/TR/wsdl.html#_introduction). A pak Váš soap klient v java jazyce vypadá následovně:
+
+```
+public class WebServiceClient {
+    public static void main(String[] args) throws InternalErrorExceptionFault, MalformedURLException {
+        SimpleWebServiceFault service = new SimpleWebServiceFault(new URL("http://localhost:8080/ws/simplest/fault/api"));
+        SimpleWebServiceFaultPortType port = service.getSimpleWebServiceFaultSoap12Http();
+        HelloRequest request = new HelloRequest();
+        request.setGreetings("Hello from Tomas");
+        System.out.println(port.helloMessage(request).getResultText());// k tomuto nedojde(resp. k getResultText), upadne to zamerna na soap fault
+    }
+}
+```
