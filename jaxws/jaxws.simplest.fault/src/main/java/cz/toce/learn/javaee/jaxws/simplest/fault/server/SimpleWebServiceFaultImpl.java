@@ -1,7 +1,10 @@
 package cz.toce.learn.javaee.jaxws.simplest.fault.server;
 
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedResponse;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRequest;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorException;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorExceptionFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimpleWebServiceFaultPortType;
 import javax.jws.WebService;
@@ -28,8 +31,15 @@ import javax.xml.ws.BindingType;
 public class SimpleWebServiceFaultImpl implements SimpleWebServiceFaultPortType {
 
     @Override
-    public HelloResponse helloMessage(HelloRequest parameters) throws InternalErrorExceptionFault {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public HelloResponse helloRuntimeException(HelloRequest parameters) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public HelloCheckedResponse helloCheckedException(HelloCheckedRequest parameters) throws InternalErrorExceptionFault {
+        InternalErrorException faultInfo = new InternalErrorException();
+        faultInfo.setMessage("shit happens, dontya?!");
+        throw new InternalErrorExceptionFault("Fack up, man", faultInfo, new IllegalStateException("deep-shit message, man"));
     }
     
 }

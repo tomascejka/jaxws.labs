@@ -1,5 +1,6 @@
 package cz.toce.learn.javaee.jaxws.simplest.fault.client;
 
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedRequest;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRequest;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorExceptionFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimpleWebServiceFault;
@@ -18,9 +19,7 @@ public class WebServiceClient {
         // -- service, kam budu posilat soap request
         URL wsdlLocation = new URL(WebServicePublisher.SERVICE_URL);
 
-        // -- Request zprava, kt. budu posilat via soap klienta
-        HelloRequest request = new HelloRequest();
-        request.setGreetings("Hello from Tomas");        
+       
         
         // --
         // -- Tento pristup je mozny, kdyz SEI napises "z ruky" a nedefinejes 
@@ -62,7 +61,18 @@ public class WebServiceClient {
         SimpleWebServiceFaultPortType p = s.getSimpleWebServiceFaultSoap12Http();
         
         // -- Volani serverové časti
-        System.out.println(p.helloMessage(request).getResultText());
+        System.out.println("--- Runtime hello ---");
+        // -- Request zprava, kt. budu posilat via soap klienta
+        HelloRequest request = new HelloRequest();
+        request.setGreetings("Hello from RUNTIME Tomas");         
+        System.out.println(p.helloRuntimeException(request).getResultText());
+        System.out.println("--");
+        System.out.println("--- Checked hello ---");
+        // -- Request zprava, kt. budu posilat via soap klienta
+        HelloCheckedRequest crequest = new HelloCheckedRequest();
+        crequest.setGreetings("Hello from CHECKED Tomas");         
+        System.out.println(p.helloCheckedException(crequest).getResultText());
+        System.out.println("--");
         
     }
 }

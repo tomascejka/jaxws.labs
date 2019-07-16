@@ -24,6 +24,21 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+            <xsd:element name="HelloCheckedRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="greetings" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="HelloCheckedResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="resultCode" type="xsd:string"/>
+                        <xsd:element name="resultText" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="InternalErrorException">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -35,11 +50,17 @@
     </types>
     
     <!-- Messages -->
-    <message name="HelloMessageRequestIn">
+    <message name="HelloExceptionIn">
         <part name="parameters" element="tns:HelloRequest"/>
     </message>
-    <message name="HelloMessageResponseOut">
+    <message name="HelloExceptionOut">
         <part name="parameters" element="tns:HelloResponse"/>
+    </message>
+    <message name="HelloCheckedExceptionIn">
+        <part name="parameters" element="tns:HelloCheckedRequest"/>
+    </message>
+    <message name="HelloCheckedExceptionOut">
+        <part name="parameters" element="tns:HelloCheckedResponse"/>
     </message>
     <message name="InternalErrorExceptionFault">
         <part name="fault" element="tns:InternalErrorException"/>
@@ -47,9 +68,15 @@
     
     <!-- Ports -->
     <portType name="SimpleWebServiceFaultPortType">
-        <operation name="helloMessage">
-            <input name="input1" message="tns:HelloMessageRequestIn"/>
-            <output name="output1" message="tns:HelloMessageResponseOut"/>
+        <operation name="helloRuntimeException">
+            <documentation>Metoda, kt. pri zpracovani vyhodi runtime exception</documentation>
+            <input name="input1" message="tns:HelloExceptionIn"/>
+            <output name="output1" message="tns:HelloExceptionOut"/>
+        </operation>
+        <operation name="helloCheckedException">
+            <documentation>Metoda, kt. pri zpracovani vyhodi checked exception - InternalErrorExceptionFault</documentation>
+            <input name="input2" message="tns:HelloCheckedExceptionIn"/>
+            <output name="output2" message="tns:HelloCheckedExceptionOut"/>
             <fault name="internalErrorException" message="tns:InternalErrorExceptionFault"/>
         </operation>
     </portType>
@@ -57,7 +84,7 @@
     <!-- Bindings -->
     <binding name="SimpleWebServiceFaultBindingSoap12Http" type="tns:SimpleWebServiceFaultPortType">
         <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="helloMessage">
+        <operation name="helloRuntimeException">
             <soap12:operation style="document" soapAction="" soapActionRequired="false"/>
             <input name="input1"><!-- ukazuje na portType/operation/input[@name]-->
                 <soap12:body use="literal"/>
@@ -65,10 +92,19 @@
             <output name="output1"><!-- ukazuje na portType/operation/output[@name]-->
                 <soap12:body use="literal"/>
             </output>
+        </operation>
+        <operation name="helloCheckedException">
+            <soap12:operation style="document" soapAction="" soapActionRequired="false"/>
+            <input name="input2"><!-- ukazuje na portType/operation/input[@name]-->
+                <soap12:body use="literal"/>
+            </input>
+            <output name="output2"><!-- ukazuje na portType/operation/output[@name]-->
+                <soap12:body use="literal"/>
+            </output>
             <fault name="internalErrorException"><!-- ukazuje na portType/operation/fault[@name]-->
                 <soap12:fault use="literal" name="internalErrorException"/>
             </fault>
-        </operation>
+        </operation>        
     </binding>
     
     <!-- Services -->
