@@ -36,7 +36,7 @@
     </build>
   
     <modules>
-        <module>jaxws.simplest</module>
         <module>jaxws.simplest.fault</module>
+        <module>jaxws.simplest.rpc</module>
     </modules>
 </project>
