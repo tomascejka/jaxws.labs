@@ -11,6 +11,7 @@
     <groupId>cz.toce.learn.javaee</groupId>
     <artifactId>jaxws.simplest.rpc</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
     <packaging>war</packaging>
     <description>Simplest implementation (bottom up approach) of soap/RPC encoded java project (of course/ignore using maven/it helps).</description>
     
@@ -26,5 +27,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    <name>jaxws.simplest.rpc</name>
 </project>
