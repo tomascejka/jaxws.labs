@@ -9,6 +9,7 @@ import cz.toce.learn.javaee.jaxws.simplest.fault.server.WebServicePublisher;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
+import javax.xml.ws.soap.SOAPBinding;
 
 /**
  *
@@ -21,7 +22,10 @@ public class WebServiceClient {
         URL wsdlLocation = new URL(WebServicePublisher.SERVICE_URL);
         SimpleWebServiceFault service = new SimpleWebServiceFault(wsdlLocation);
         SimpleWebServiceFaultPortType port = service.getSimpleWebServiceFaultSoap12Http();
-
+        //service.addPort(new QName("http://api.fault.simplest.jaxws.javaee.learn.toce.cz", "SimpleWebServiceFaultSoap11Http"), SOAPBinding.SOAP11HTTP_BINDING, WebServicePublisher.SERVICE_URL);
+        //port = service.getSimpleWebServiceFaultSoap11Http();
+        
+        
         // --
         // -- Volani serverové časti
         // -- 
