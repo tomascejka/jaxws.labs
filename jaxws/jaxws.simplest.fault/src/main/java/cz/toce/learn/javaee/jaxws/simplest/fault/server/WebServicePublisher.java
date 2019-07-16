@@ -15,7 +15,7 @@ public class WebServicePublisher {
      * @param args parameters for call
      */
     public static void main(String[] args) {
-        Endpoint.publish(SERVICE_URL, new SimpleWebServiceFaultImpl());
+        Endpoint.publish(SERVICE_URL, new SimpleWebServiceFault12Impl());
         System.out.println("--");
         System.out.println("WebService has been published at url: "+SERVICE_URL);
         System.out.println("Published wsdl can be downloaded at url: "+SERVICE_URL+"?wsdl");

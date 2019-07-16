@@ -28,7 +28,7 @@ import javax.xml.ws.BindingType;
         endpointInterface = "cz.toce.learn.javaee.jaxws.simplest.fault.api.SimpleWebServiceFaultPortType" // viz. složenina, viz. targetNamespace + /definitions/portType[@name]
 )
 @BindingType(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
-public class SimpleWebServiceFaultImpl implements SimpleWebServiceFaultPortType {
+public class SimpleWebServiceFault12Impl implements SimpleWebServiceFaultPortType {
 
     @Override
     public HelloResponse helloRuntimeException(HelloRequest parameters) {
