@@ -6,7 +6,7 @@
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
              xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl">
-    <!-- Types: via XSD-->
+    <!-- xTypes: via XSD-->
     <types>
         <xsd:schema targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz" elementFormDefault="qualified">
             <xsd:element name="HelloRequest">
