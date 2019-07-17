@@ -8,8 +8,11 @@ Používám tento projekt pro studijní účely (to především), a k různých
 * **jaxws.simplest.handler** - jak implementovat/pracovat s soap handler-em (JAX-WS AOP přístup k soap zprávám)
 ... další budou přibývat
 
+## Spustitelnost
+Příklady jdou jednoduše spustit v konsoli (primární cíl, protože chci rychle a snadno ověřit myšlenku/nápad/tvrzení apod.). Nicméně příklady jsou to maven projekty s packaging war, tzn. lze je spouštět i jako webové aplikace (např. v Netbeans IDE stačí pravé tl. myši a příkaz Run).
+
 ## Poznámka pod čarou
-Pokud existuje jednodušší cesta, kterou naleznete kdekoli v kódu/projektech a budete se chtít podělit - dejte vědet.
+Pokud existuje jednodušší cesta, kterou naleznete kdekoli v kódu/projektech a budete se chtít podělit - dejte vědet (love minimalismus).
 
 ## Zdroje
 * [JAX-WS SE documentation](https://docs.oracle.com/javase/7/docs/technotes/guides/xml/jax-ws/index.html)
