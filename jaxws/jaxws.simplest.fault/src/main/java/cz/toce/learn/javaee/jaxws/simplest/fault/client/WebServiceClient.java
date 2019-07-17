@@ -1,46 +1,42 @@
 package cz.toce.learn.javaee.jaxws.simplest.fault.client;
 
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorExceptionFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimpleWebServiceFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimpleWebServiceFaultPortType;
 import cz.toce.learn.javaee.jaxws.simplest.fault.server.WebServicePublisher;
 import java.net.MalformedURLException;
 import java.net.URL;
-import javax.xml.namespace.QName;
-import javax.xml.ws.soap.SOAPBinding;
 
 /**
  *
  * @author tomas.cejka
  */
 public class WebServiceClient {
+//*
+
+    private static final boolean IS_EXEC_RUNTIME = true;
 
     public static void main(String[] args) throws InternalErrorExceptionFault, MalformedURLException {
         // -- service, kam budu posilat soap request
         URL wsdlLocation = new URL(WebServicePublisher.SERVICE_URL);
         SimpleWebServiceFault service = new SimpleWebServiceFault(wsdlLocation);
         SimpleWebServiceFaultPortType port = service.getSimpleWebServiceFaultSoap12Http();
-        //service.addPort(new QName("http://api.fault.simplest.jaxws.javaee.learn.toce.cz", "SimpleWebServiceFaultSoap11Http"), SOAPBinding.SOAP11HTTP_BINDING, WebServicePublisher.SERVICE_URL);
-        //port = service.getSimpleWebServiceFaultSoap11Http();
-        
-        
-        // --
+
         // -- Volani serverové časti
-        // -- 
-        System.out.println("--- Runtime hello ---");
-        // -- Request zprava, kt. budu posilat via soap klienta
-        HelloRequest request = new HelloRequest();
-        request.setGreetings("Hello from RUNTIME Tomas");
-        System.out.println(port.helloRuntimeException(request).getResultText());
-        System.out.println("--");
-        System.out.println("--- Checked hello ---");
-        // -- Request zprava, kt. budu posilat via soap klienta
-        HelloCheckedRequest crequest = new HelloCheckedRequest();
-        crequest.setGreetings("Hello from CHECKED Tomas");
-        System.out.println(port.helloCheckedException(crequest).getResultText());
+        System.out.println("--- Hello request ---");
+        if (IS_EXEC_RUNTIME) {
+            HelloRuntimeExceptionRequest request = new HelloRuntimeExceptionRequest();
+            request.setGreetings("Hello from RUNTIME Tomas");
+            System.out.println(port.helloRuntimeException(request).getResultText());
+        } else {
+            HelloCheckedExceptionRequest crequest = new HelloCheckedExceptionRequest();
+            crequest.setGreetings("Hello from CHECKED Tomas");
+            System.out.println(port.helloCheckedException(crequest).getResultText());
+        }
         System.out.println("--");
 
     }
+//*/
 }

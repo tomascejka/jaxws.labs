@@ -1,14 +1,30 @@
 package cz.toce.learn.javaee.jaxws.simplest.fault.server;
 
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloSoapFaultExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloSoapFaultExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloWebServiceExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloWebServiceExceptionResponse;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorException;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorExceptionFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimpleWebServiceFaultPortType;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
+import javax.xml.namespace.QName;
+import javax.xml.soap.Detail;
+import javax.xml.soap.SOAPConstants;
+import javax.xml.soap.SOAPElement;
+import javax.xml.soap.SOAPException;
+import javax.xml.soap.SOAPFactory;
+import javax.xml.soap.SOAPFault;
 import javax.xml.ws.BindingType;
+import javax.xml.ws.WebServiceException;
+import javax.xml.ws.soap.SOAPFaultException;
 
 /**
  * <p>Pri psani SEI (teto tridy) pouzivej v anotaci @WebService tyto atributy:</p>
@@ -30,16 +46,41 @@ import javax.xml.ws.BindingType;
 @BindingType(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
 public class SimpleWebServiceFault12Impl implements SimpleWebServiceFaultPortType {
 
+    private static final Logger LOG = Logger.getLogger(SimpleWebServiceFault12Impl.class.getName());
+    
     @Override
-    public HelloResponse helloRuntimeException(HelloRequest parameters) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public HelloRuntimeExceptionResponse helloRuntimeException(HelloRuntimeExceptionRequest parameters) {
+        throw new RuntimeException("Not supported yet.");
     }
 
     @Override
-    public HelloCheckedResponse helloCheckedException(HelloCheckedRequest parameters) throws InternalErrorExceptionFault {
+    public HelloCheckedExceptionResponse helloCheckedException(HelloCheckedExceptionRequest parameters) throws InternalErrorExceptionFault {
         InternalErrorException faultInfo = new InternalErrorException();
         faultInfo.setMessage("shit happens, dontya?!");
         throw new InternalErrorExceptionFault("Fack up, man", faultInfo, new IllegalStateException("deep-shit message, man"));
+    }
+
+    @Override
+    public HelloWebServiceExceptionResponse helloWebServiceException(HelloWebServiceExceptionRequest parameters) {
+        throw new WebServiceException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public HelloSoapFaultExceptionResponse helloSoapFaultException(HelloSoapFaultExceptionRequest parameters) {
+        try {
+            SOAPFactory soapFactory = SOAPFactory.newInstance( SOAPConstants.SOAP_1_2_PROTOCOL );
+            SOAPFault soapFault = soapFactory.createFault();
+            soapFault.appendFaultSubcode( new QName( "http://api.fault.simplest.jaxws.javaee.learn.toce.cz", "SomethingDefined" ) );
+            soapFault.setFaultRole( "http://api.fault.simplest.jaxws.javaee.learn.toce.cz/sample" );
+            soapFault.addFaultReasonText( "SOAPFaultException happens.", Locale.getDefault() );
+            Detail detail = soapFault.addDetail();
+            SOAPElement soapElement = detail.addChildElement( new QName( "http://api.fault.simplest.jaxws.javaee.learn.toce.cz", "SomeSpecificReason" ) );
+            soapElement.addTextNode( "TEST something detail section." );
+            throw new SOAPFaultException( soapFault );
+        } catch (SOAPException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+            throw new WebServiceException("Soap fault exception fack up ...");
+        }
     }
     
 }
