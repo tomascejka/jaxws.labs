@@ -10,16 +10,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- *
  * @author tomas.cejka
  */
 public class WebServiceClient {
 //*
-
     private static final boolean IS_EXEC_RUNTIME = true;
 
     public static void main(String[] args) throws InternalErrorExceptionFault, MalformedURLException {
-        // -- service, kam budu posilat soap request
         URL wsdlLocation = new URL(WebServicePublisher.SERVICE_URL);
         SimpleWebServiceFault service = new SimpleWebServiceFault(wsdlLocation);
         SimpleWebServiceFaultPortType port = service.getSimpleWebServiceFaultSoap12Http();
