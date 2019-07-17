@@ -1,11 +1,11 @@
 # JAX-WS study project
-Používám tento projekt pro studijní účely to především, a k různých typům příkladů, popř. k prototypování apod.
+Používám tento projekt pro studijní účely (to především), a k různých typům příkladů/pokusům, popř. k prototypování apod.
 
 ## Seznam projektů
-* jaxws.simplest - jak implementovat WSDL/SOAP (rcp/literal, bez xsd/wsdl) server/client aplikaci v java
-* jaxws.simplest.fault - jak implementovat/pracovat s soap fault konstruktem (mechanismus pro chybové stavy s WSDL/SOAP API)
-* jaxws.simplest.faulthandler - navazuji na předchozí projekt s tím, že soap fault zaloguji v triviálním handleru (kt. definuji programovým přístupem, tzn. nepoužívám anotaci+soubor)
-* jaxws.simplest.handler - jak implementovat/pracovat s soap handler-em (JAX-WS AOP přístup k soap zprávám)
+* **jaxws.simplest.rpc** - jak implementovat WSDL/SOAP (rpc/literal, bez xsd/wsdl) server/client aplikaci v java
+* **jaxws.simplest.fault** - jak implementovat/pracovat s soap fault konstruktem (mechanismus pro chybové stavy s WSDL/SOAP API)
+* **jaxws.simplest.faulthandler** - navazuji na předchozí projekt s tím, že soap fault zaloguji v triviálním handleru (kt. definuji programovým přístupem, tzn. nepoužívám anotaci+soubor)
+* **jaxws.simplest.handler** - jak implementovat/pracovat s soap handler-em (JAX-WS AOP přístup k soap zprávám)
 ... další budou přibývat
 
 ## Poznámka pod čarou
