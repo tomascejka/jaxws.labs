@@ -131,7 +131,7 @@
             <fault name="internalErrorException" message="tns:InternalErrorExceptionFault"/>
         </operation>
         <operation name="helloWebServiceException">
-            <documentation>Metoda, kt. pri zpracovani vyhodi javax.ws.WebServiceException</documentation>
+            <documentation>Metoda, kt. pri zpracovani vyhodi javax.xml.ws.WebServiceException</documentation>
             <input name="input3" message="tns:HelloWebServiceExceptionIn"/>
             <output name="output3" message="tns:HelloWebServiceExceptionOut"/>
         </operation>
