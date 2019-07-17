@@ -20,15 +20,8 @@
     
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>${java.ee.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
-            <version>${jaxws.rt.version}</version>
         </dependency>
     </dependencies>
     
