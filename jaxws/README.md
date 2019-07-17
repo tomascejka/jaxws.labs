@@ -1,8 +1,17 @@
 # JAX-WS study project
-Using for various implementation of soap based web services (examples, prototypes etc).
+Používám tento projekt pro studijní účely to především, a k různých typům příkladů, popř. k prototypování apod.
 
-## Sources
+## Seznam projektů
+* jaxws.simplest - jak implementovat WSDL/SOAP (rcp/literal, bez xsd/wsdl) server/client aplikaci v java
+* jaxws.simplest.fault - jak implementovat/pracovat s soap fault konstruktem (mechanismus pro chybové stavy s WSDL/SOAP API)
+* jaxws.simplest.faulthandler - navazuji na předchozí projekt s tím, že soap fault zaloguji v triviálním handleru (kt. definuji programovým přístupem, tzn. nepoužívám anotaci+soubor)
+* jaxws.simplest.handler - jak implementovat/pracovat s soap handler-em (JAX-WS AOP přístup k soap zprávám)
+... další budou přibývat
 
+## Poznámka pod čarou
+Pokud existuje jednodušší cesta, kterou naleznete kdekoli v kódu/projektech a budete se chtít podělit - dejte vědet.
+
+## Zdroje
 * [JAX-WS SE documentation](https://docs.oracle.com/javase/7/docs/technotes/guides/xml/jax-ws/index.html)
 * JAX-WS [release notes](https://javaee.github.io/metro-jax-ws/doc/user-guide/ch02.html)
 * JAX-WS [user guid](https://javaee.github.io/metro-jax-ws/doc/user-guide/ch03.html)
