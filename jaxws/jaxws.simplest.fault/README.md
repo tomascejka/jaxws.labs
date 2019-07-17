@@ -247,21 +247,6 @@ Takto vypadá SOAP Fault pro SOAP v1.2
 ## Závěr
 SOAP Fault je chybový stav, který je zobecněný a popsaný XSD schématem, který definuje specifikace SOAP[11,12]. Technickým výstupem je to vždy výjimka (pokud se bavíme o java jazyce), jejíchž chování je popsáno ve JAX-WS specifikaci [13]. Bacha aktuálně jsou dvě verse, které se obsahem liší (na úrovni xml formátu, SOAP fault zprávy - proto mnoho ukázek kódu - postihuje obě verse).
 
-## Zdroje
-1. http://itdoc.hitachi.co.jp/manuals/3020/30203Y2310e/EY230182.HTM#ID00331 << Fault and exception processing on the Web Service - Wrapper exception class binding
-2. https://docs.oracle.com/cd/E24329_01/web.1211/e24965/faults.htm#BABEGCDC << JAX-WS Java-to-WSDL mapping binds subclasses of java.lang.Exception to wsdl:fault messages
-3. https://www.w3.org/TR/2001/NOTE-wsdl-20010315#_soap:fault << specifikace WSDL 1.1 binding SOAP 1.1
-4. https://www.w3.org/Submission/wsdl11soap12/#fault-element << specifikace WSDL 1.1 binding SOAP 1.2
-5. Jak deklarovat soap fault ve WSDL
-6. https://docs.oracle.com/cd/E24329_01/web.1211/e24965/faults.htm#WSADV633 << Using Modeled Faults
-7. https://docs.oracle.com/cd/E24329_01/web.1211/e24965/faults.htm#WSADV650 << Using Unmodeled Faults
-8. https://www.w3.org/TR/soap/ << SOAP specifikace (rozcestník na aktuálně obě SOAP 1.1/1.2 verse)
-9. https://www.w3.org/TR/2000/NOTE-SOAP-20000508/ << specifikace SOAP 1.1
-10. https://www.w3.org/TR/soap12/ << specifikace SOAP 1.2
-11. https://www.w3.org/TR/2000/NOTE-SOAP-20000508/#_Toc478383507 << spec SOAP Fault 1.1
-12. https://www.w3.org/TR/soap12/#soapfault <<spec SOAP Fault 1.2
-13. JAX-WS 2.2 specifications (najít odkaz)
-
 # Jak nejjednodušeji definovat SEI
 Při psaní implementace, jsem si vylámal zuby, jak pojmenovávat třídy, popř. jaké používat package name a vůbec názvosloví. Po několikahodinovém zkoumání a nutno říct, že jsem ořezával dokud to šlo, jsem skončil s tímto výsledkem:
 
@@ -277,7 +262,7 @@ Stačí použít anotaci [WebService](https://docs.oracle.com/javaee/7/api/javax
  * targetNamespace, viz. `/definitions[@targetNamespace]`
  * endpointInterface (celá package cesta, tzn. targetNamespace+name), a name zjistim viz. `/definitions/portType[@name]`
 
-... pozn: všechny xml cesty výše uvedené platí pro názvosloví praktikované/používané v [WSDL 1.1](https://www.w3.org/TR/wsdl.html#_introduction). A pak Váš soap klient v java jazyce vypadá následovně:
+... pozn: všechny xml cesty výše uvedené platí pro názvosloví praktikované/používané v [WSDL 1.1](https://www.w3.org/TR/wsdl.html#_introduction) a pro mapování/binding je použit [SOAP 1.2](https://www.w3.org/TR/soap12/), respektive binding pro [SOAP Fault 1.2](https://www.w3.org/TR/soap12/#soapfault). A pak Váš soap klient v java jazyce vypadá následovně:
 
 ```
 public class WebServiceClient {
@@ -290,7 +275,7 @@ public class WebServiceClient {
     }
 }
 ```
-*Figure 14* - nejjednodušší zápis soap web service klienta
+**Figure 14** - nejjednodušší zápis soap web service klienta
 
 ## Jak projekt použít/spustit
 Naklonuj si příslušný adresář via git a přesuň se do root adresáře projektu.
@@ -301,6 +286,7 @@ Používám maven, takže v příslušném modulu (více modulový projekt v mav
 ```
 mvn clean package
 ``` 
+**Figure 15** - zbuilduj projekt
 
 ### Publikování endpoint-u
 Pro publikování WSDL via ([Endpoint](https://docs.oracle.com/javase/7/docs/api/javax/xml/ws/Endpoint.html)) používám nativní JDK chování/nástroj a poté jsem schopen spustit zbuildovanou/zkompilovanou třídu ([WebServicePublisher.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/fault/server/WebServicePublisher.java)), který vystaví WSDL na adrese = `http://localhost:8080/ws/SimpleWebService`. Pro spuštění použiji maven plugin [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html) - spuštění je blokující, takže tento skript spouštím ve svém vlastním okně (v tomto případě pomocí Windows CMD/Batch příkazu: `start call ...`):
@@ -308,6 +294,7 @@ Pro publikování WSDL via ([Endpoint](https://docs.oracle.com/javase/7/docs/api
 ```
 start call mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.jaxws.simplest.fault.server.WebServicePublisher"
 ```
+**Figure 16** - spusť endpoint webové služby (vystavíš WSDL)
 
 ### Spuštění klienta
 Pro spuštění na klientské straně - použiji opět předkompilovanou třídu ([WebServiceClient.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/client/impl/WebServiceClient.java))(připravenou ve stejném projektu,pouze pro jednoduchost, v praxi by byla klientská implementace v jiném projektu) a opět ji zavolám pomocí maven pluginu [exec](http://www.mojohaus.org/exec-maven-plugin/usage.html):
@@ -315,8 +302,9 @@ Pro spuštění na klientské straně - použiji opět předkompilovanou třídu
 ```
 mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.jaxws.simplest.fault.client.WebServiceClient"
 ```
+**Figure 17** - spusť klienta webové služby (a sleduj konsoli)
 
-Výstupem je výpis z konsole, že je vrácen soap fault (v1.2). viz níže:
+Výstupem je výjimka výpsana do konsole, což znamená, že je vrácen soap fault (v1.2). viz níže:
 
 <pre>
 [INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ jaxws.simplest.fault ---
@@ -340,3 +328,19 @@ com.sun.xml.internal.ws.fault.ServerSOAPFaultException: Client received SOAP Fau
         at java.lang.Thread.run(Thread.java:748)
 [INFO] ------------------------------------------------------------------------
 </pre>
+**Figure 18** - jak je presentován soap fault v konsoli (je to prachsprostá výjimka :))
+
+## Zdroje
+1. http://itdoc.hitachi.co.jp/manuals/3020/30203Y2310e/EY230182.HTM#ID00331 << Fault and exception processing on the Web Service - Wrapper exception class binding
+2. https://docs.oracle.com/cd/E24329_01/web.1211/e24965/faults.htm#BABEGCDC << JAX-WS Java-to-WSDL mapping binds subclasses of java.lang.Exception to wsdl:fault messages
+3. https://www.w3.org/TR/2001/NOTE-wsdl-20010315#_soap:fault << specifikace WSDL 1.1 binding SOAP 1.1
+4. https://www.w3.org/Submission/wsdl11soap12/#fault-element << specifikace WSDL 1.1 binding SOAP 1.2
+5. Jak deklarovat soap fault ve WSDL
+6. https://docs.oracle.com/cd/E24329_01/web.1211/e24965/faults.htm#WSADV633 << Using Modeled Faults
+7. https://docs.oracle.com/cd/E24329_01/web.1211/e24965/faults.htm#WSADV650 << Using Unmodeled Faults
+8. https://www.w3.org/TR/soap/ << SOAP specifikace (rozcestník na aktuálně obě SOAP 1.1/1.2 verse)
+9. https://www.w3.org/TR/2000/NOTE-SOAP-20000508/ << specifikace SOAP 1.1
+10. https://www.w3.org/TR/soap12/ << specifikace SOAP 1.2
+11. https://www.w3.org/TR/2000/NOTE-SOAP-20000508/#_Toc478383507 << spec SOAP Fault 1.1
+12. https://www.w3.org/TR/soap12/#soapfault <<spec SOAP Fault 1.2
+13. JAX-WS 2.2 specifications (najít odkaz)
