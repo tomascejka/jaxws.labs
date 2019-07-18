@@ -8,10 +8,10 @@
     <name>jaxws.parent</name>
     
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.ee.version>7.0</java.ee.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jaxws.rt.version>2.3.2</jaxws.rt.version>
         <jaxws-maven-plugin.version>2.5</jaxws-maven-plugin.version>
         <jaxws.tools.version>2.3.2</jaxws.tools.version>
@@ -72,5 +72,6 @@
     <modules>
         <module>jaxws.simplest.fault</module>
         <module>jaxws.simplest.rpc</module>
-    </modules>
+        <module>jaxws.simplest.faulthandler</module>
+  </modules>
 </project>
