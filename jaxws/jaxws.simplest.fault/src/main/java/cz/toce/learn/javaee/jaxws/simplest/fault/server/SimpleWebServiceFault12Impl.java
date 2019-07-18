@@ -62,7 +62,7 @@ public class SimpleWebServiceFault12Impl implements SimpleWebServiceFaultPortTyp
 
     @Override
     public HelloWebServiceExceptionResponse helloWebServiceException(HelloWebServiceExceptionRequest parameters) {
-        throw new WebServiceException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new WebServiceException("Web service exception.");
     }
 
     @Override
