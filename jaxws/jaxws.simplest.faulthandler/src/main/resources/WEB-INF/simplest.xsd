@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://api.faulthandler.simplest.jaxws.javaee.learn.toce.cz"
+xmlns:api="http://api.faulthandler.simplest.jaxws.javaee.learn.toce.cz" 
+            elementFormDefault="qualified">
+    <xsd:complexType name="HelloRequestType">
+        <xsd:sequence>
+            <xsd:element name="greetings" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="HelloResponseType">
+        <xsd:sequence>
+            <xsd:element name="resultCode" type="xsd:string"/>
+            <xsd:element name="resultText" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>           
+
+    <xsd:element name="HelloRuntimeExceptionRequest">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloRequestType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelloRuntimeExceptionResponse">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloResponseType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelloCheckedExceptionRequest">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloRequestType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelloCheckedExceptionResponse">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloResponseType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelloWebServiceExceptionRequest">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloRequestType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelloWebServiceExceptionResponse">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloResponseType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelloSoapFaultExceptionRequest">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloRequestType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelloSoapFaultExceptionResponse">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloResponseType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>        
+    <xsd:element name="InternalErrorException">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="message" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
