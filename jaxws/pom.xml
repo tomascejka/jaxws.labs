@@ -73,5 +73,6 @@
         <module>jaxws.simplest.fault</module>
         <module>jaxws.simplest.rpc</module>
         <module>jaxws.simplest.faulthandler</module>
+        <module>jaxws.simplest.handler</module>
   </modules>
 </project>
