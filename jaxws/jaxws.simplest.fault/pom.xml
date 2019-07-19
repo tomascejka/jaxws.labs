@@ -7,12 +7,13 @@
         <artifactId>jaxws.parent</artifactId>
         <version>1.0.0</version>
     </parent>
+    
     <groupId>cz.toce.learn.javaee</groupId>
     <artifactId>jaxws.simplest.fault</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>jaxws.simplest.fault</name>
     <packaging>war</packaging>
-    <description>Simplest implementation (top down approach) of soap java project with basic usage of soap fault (exception handling).</description>
+    <description>Simplest implementation (top down approach) of soap java project with basic usage of soap fault (exception handling)</description>
     
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -39,7 +40,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <wsdlDirectory>${project.basedir}\src\main\resources\WEB-INF</wsdlDirectory>
+                    <wsdlDirectory>${project.basedir}\src\main\webapp\WEB-INF\wsdl</wsdlDirectory>
                     <wsdlFiles>
                         <wsdlFile>SimpleWebServiceFault.wsdl</wsdlFile>
                     </wsdlFiles>

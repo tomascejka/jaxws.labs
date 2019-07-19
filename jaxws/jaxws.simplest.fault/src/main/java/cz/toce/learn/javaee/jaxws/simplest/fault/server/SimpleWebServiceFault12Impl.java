@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 import javax.xml.namespace.QName;
 import javax.xml.soap.Detail;
 import javax.xml.soap.SOAPConstants;

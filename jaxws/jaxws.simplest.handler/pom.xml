@@ -6,11 +6,11 @@
         <groupId>cz.toce.learn.javaee</groupId>
         <version>1.0.0</version>
     </parent>
+    
     <groupId>cz.toce.learn.javaee</groupId>
     <artifactId>jaxws.simplest.handler</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
-    
     <description>Simplest implementation (top down approach) of soap java project with basic usage of soap handler</description>
             
     <properties>
@@ -38,7 +38,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <wsdlDirectory>${project.basedir}\src\main\resources\WEB-INF</wsdlDirectory>
+                    <wsdlDirectory>${project.basedir}\src\main\webapp\WEB-INF\wsdl</wsdlDirectory>
                     <wsdlFiles>
                         <wsdlFile>SimpleWebServiceHandler.wsdl</wsdlFile>
                     </wsdlFiles>
