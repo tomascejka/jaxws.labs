@@ -1,5 +1,10 @@
 package cz.toce.learn.javaee.jaxws.simplest.faulthandler.client;
 
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.InternalErrorExceptionFault;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.SimpleWebServiceFaultHandler;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.SimpleWebServiceFaultHandlerPortType;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloCheckedExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloRuntimeExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.faulthandler.server.WebServicePublisher;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,7 +18,7 @@ import javax.xml.ws.handler.Handler;
  * @author tomas.cejka
  */
 public class WebServiceClient {
-/*
+//*
     private static final boolean execRuntime = false;
     
     public static void main(String[] args) throws InternalErrorExceptionFault, MalformedURLException {
@@ -30,12 +35,12 @@ public class WebServiceClient {
         // -- Volani serverové časti
         if(execRuntime) {
             // -- Request zprava, kt. budu posilat via soap klienta
-            HelloRequest request = new HelloRequest();
+            HelloRuntimeExceptionRequest request = new HelloRuntimeExceptionRequest();
             request.setGreetings("Hello from RUNTIME Tomas");
             System.out.println(port.helloRuntimeException(request).getResultText());
         } else {
             // -- Request zprava, kt. budu posilat via soap klienta
-            HelloCheckedRequest crequest = new HelloCheckedRequest();
+            HelloCheckedExceptionRequest crequest = new HelloCheckedExceptionRequest();
             crequest.setGreetings("Hello from CHECKED Tomas");
             System.out.println(port.helloCheckedException(crequest).getResultText());
         }

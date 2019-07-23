@@ -1,16 +1,16 @@
 package cz.toce.learn.javaee.jaxws.simplest.faulthandler.server;
 
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.InternalErrorExceptionFault;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.SimpleWebServiceFaultHandlerPortType;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.HelloCheckedExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.HelloCheckedExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.HelloRuntimeExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.HelloRuntimeExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.HelloSoapFaultExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.HelloSoapFaultExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.HelloWebServiceExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.HelloWebServiceExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.InternalErrorException;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.InternalErrorExceptionFault;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.SimpleWebServiceFaultHandlerPortType;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloCheckedExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloCheckedExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloRuntimeExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloRuntimeExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloSoapFaultExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloSoapFaultExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloWebServiceExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloWebServiceExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.InternalErrorException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +41,7 @@ import javax.xml.ws.soap.SOAPFaultException;
         serviceName="SimpleWebServiceFaultHandler", // viz. /definitions/service[@name]
         portName = "SimpleWebServiceFaultHandlerSoap12Http",// viz. /definitions/service/port[@name]
         targetNamespace = "http://api.faulthandler.simplest.jaxws.javaee.learn.toce.cz", // viz. /definitions[@targetNamespace]
-        endpointInterface = "cz.toce.learn.javaee.jaxws.simplest.faulthandler.SimpleWebServiceFaultHandlerPortType" // viz. složenina, viz. targetNamespace + /definitions/portType[@name]
+        endpointInterface = "cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.SimpleWebServiceFaultHandlerPortType" // viz. složenina, viz. targetNamespace + /definitions/portType[@name]
 )
 @BindingType(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
 public class SimpleWebServiceFaultHandlerImpl implements SimpleWebServiceFaultHandlerPortType {

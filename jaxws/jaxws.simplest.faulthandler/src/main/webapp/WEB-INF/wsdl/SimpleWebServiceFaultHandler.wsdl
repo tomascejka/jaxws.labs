@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions name="SimpleFaultHandlerWsdl" 
-             targetNamespace="http://faulthandler.simplest.jaxws.javaee.learn.toce.cz"
-             xmlns:tns="http://faulthandler.simplest.jaxws.javaee.learn.toce.cz"
+             targetNamespace="http://api.faulthandler.simplest.jaxws.javaee.learn.toce.cz"
+             xmlns:tns="http://api.faulthandler.simplest.jaxws.javaee.learn.toce.cz"
              xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-             xmlns:api="http://api.faulthandler.simplest.jaxws.javaee.learn.toce.cz">
+             xmlns:api="http://model.api.faulthandler.simplest.jaxws.javaee.learn.toce.cz">
     <!-- xTypes: via XSD-->
     <types>
         <xsd:schema elementFormDefault="qualified">
-            <xsd:import namespace="http://api.faulthandler.simplest.jaxws.javaee.learn.toce.cz" schemaLocation="simplest.xsd"/>
+            <xsd:import namespace="http://model.api.faulthandler.simplest.jaxws.javaee.learn.toce.cz" schemaLocation="simplest.xsd"/>
         </xsd:schema>
     </types>
     
