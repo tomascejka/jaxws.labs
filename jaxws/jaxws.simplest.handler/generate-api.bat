@@ -8,7 +8,7 @@ REM @author tomas.cejka
 REM
 
 SET wsname=SimpleWebServiceHandler
-SET resdir=src\main\resources
+SET resdir=src\main\webapp
 SET gendir=target\generated-sources\wsimport
 REM SET port=8084
 
@@ -19,4 +19,4 @@ IF NOT EXIST %gendir% (
 
 :generate
 REM wsimport -s src\main\java -d %gendir% http://localhost:%port%/ws/%wsname%?wsdl
-wsimport %resdir%\WEB-INF\%wsname%.wsdl -extension -s %gendir% -d %gendir% 
+wsimport %resdir%\WEB-INF\wsdl\%wsname%.wsdl -extension -s %gendir% -d %gendir% 
