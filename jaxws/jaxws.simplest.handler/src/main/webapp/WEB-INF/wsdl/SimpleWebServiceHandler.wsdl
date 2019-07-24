@@ -42,7 +42,13 @@
     </message>
     <message name="InternalErrorExceptionFault">
         <part name="fault" element="api:InternalErrorException"/>
-    </message>    
+    </message>
+    <message name="HelloRequestIn">
+        <part name="parameters" element="api:HelloRequest"/>
+    </message>
+    <message name="HelloResponseOut">
+        <part name="parameters" element="api:HelloResponse"/>
+    </message>  
     
     <!-- Ports -->
     <portType name="SimpleWebServiceHandlerPortType">
@@ -66,6 +72,11 @@
             <documentation>Metoda, kt. pri zpracovani vyhodi javax.xml.ws.soap.SOAPFaultException</documentation>
             <input name="input4" message="tns:HelloSoapFaultExceptionIn"/>
             <output name="output4" message="tns:HelloSoapFaultExceptionOut"/>
+        </operation>
+        <operation name="hello">
+            <documentation>Metoda, kt. pri zpracovani vraci business odpoved</documentation>
+            <input name="helloRequest" message="tns:HelloRequestIn"/>
+            <output name="helloResponse" message="tns:HelloResponseOut"/>
         </operation>
     </portType>
     
@@ -110,6 +121,15 @@
             <output name="output4"><!-- ukazuje na portType/operation/output[@name]-->
                 <soap12:body use="literal"/>
             </output>
+        </operation>
+        <operation name="hello">
+            <soap:operation style="document" soapAction=""/>
+            <input name="helloRequest"><!-- ukazuje na portType/operation/input[@name]-->
+                <soap:body use="literal"/>
+            </input>
+            <output name="helloResponse"><!-- ukazuje na portType/operation/output[@name]-->
+                <soap12:body use="literal"/>
+            </output>
         </operation>        
     </binding>
     <binding name="SimpleWebServiceHandlerBindingSoap12Http" type="tns:SimpleWebServiceHandlerPortType">
@@ -152,7 +172,16 @@
             <output name="output4"><!-- ukazuje na portType/operation/output[@name]-->
                 <soap12:body use="literal"/>
             </output>
-        </operation>         
+        </operation>
+        <operation name="hello">
+            <soap:operation style="document" soapAction=""/>
+            <input name="helloRequest"><!-- ukazuje na portType/operation/input[@name]-->
+                <soap:body use="literal"/>
+            </input>
+            <output name="helloResponse"><!-- ukazuje na portType/operation/output[@name]-->
+                <soap12:body use="literal"/>
+            </output>
+        </operation>       
     </binding>
     
     <!-- Services -->

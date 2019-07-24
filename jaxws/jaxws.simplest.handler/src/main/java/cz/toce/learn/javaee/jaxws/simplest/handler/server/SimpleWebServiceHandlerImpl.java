@@ -4,6 +4,8 @@ import cz.toce.learn.javaee.jaxws.simplest.handler.api.InternalErrorExceptionFau
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.SimpleWebServiceHandlerPortType;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloCheckedExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloCheckedExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloRequest;
+import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloResponse;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloRuntimeExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloRuntimeExceptionResponse;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloSoapFaultExceptionRequest;
@@ -83,5 +85,13 @@ public class SimpleWebServiceHandlerImpl implements SimpleWebServiceHandlerPortT
         InternalErrorException faultInfo = new InternalErrorException();
         faultInfo.setMessage("shit happens, dontya?! (soap fault handler)");
         throw new InternalErrorExceptionFault("Fack up, man (soap fault handler)", faultInfo, new IllegalStateException("deep-shit message (soap fault handler), man"));
+    }
+
+    @Override
+    public HelloResponse hello(HelloRequest parameters) {
+        HelloResponse retval = new HelloResponse();
+        retval.setResultCode("OK");
+        retval.setResultText("Approved");
+        return retval;
     }
 }

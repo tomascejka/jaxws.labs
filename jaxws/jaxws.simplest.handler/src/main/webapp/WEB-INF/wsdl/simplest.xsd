@@ -77,5 +77,20 @@
                 <xsd:element name="message" type="xsd:string"/>
             </xsd:sequence>
         </xsd:complexType>
+    </xsd:element>           
+
+    <xsd:element name="HelloRequest">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloRequestType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HelloResponse">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="api:HelloResponseType"/>
+            </xsd:complexContent>
+        </xsd:complexType>
     </xsd:element>
 </xsd:schema>

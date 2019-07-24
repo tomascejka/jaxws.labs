@@ -1,6 +1,6 @@
 package cz.toce.learn.javaee.jaxws.simplest.handler.tool;
 
-import cz.toce.learn.javaee.jaxws.simplest.handler.client.SimpleWebServiceSoapHandler;
+import cz.toce.learn.javaee.jaxws.simplest.handler.client.SimpleWebServiceLogSoapHandler;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -56,7 +56,7 @@ public class XmlFormatter {
         } catch (ParserConfigurationException | IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
         } catch (org.xml.sax.SAXException ex) {
-            Logger.getLogger(SimpleWebServiceSoapHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SimpleWebServiceLogSoapHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
