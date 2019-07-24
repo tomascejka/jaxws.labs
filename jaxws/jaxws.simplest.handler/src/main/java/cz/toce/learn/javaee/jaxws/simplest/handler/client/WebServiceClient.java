@@ -3,9 +3,7 @@ package cz.toce.learn.javaee.jaxws.simplest.handler.client;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.InternalErrorExceptionFault;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.SimpleWebServiceHandler;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.SimpleWebServiceHandlerPortType;
-import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloCheckedExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloRequest;
-import cz.toce.learn.javaee.jaxws.simplest.handler.api.model.HelloRuntimeExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.handler.server.WebServicePublisher;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,7 +27,6 @@ public class WebServiceClient {
         // -- Pridani handleru
         List<Handler> handlerChain = new ArrayList<>();
         handlerChain.add(new SimpleWebServiceLogSoapHandler());
-        handlerChain.add(new SimpleWebServiceValidationSoapHandler());
         ((BindingProvider) port).getBinding().setHandlerChain(handlerChain);
         
         HelloRequest request = new HelloRequest();
