@@ -49,16 +49,19 @@ public class SimpleWebServiceFault12Impl implements SimpleWebServiceFaultPortTyp
 
     private static final Logger LOG = Logger.getLogger(SimpleWebServiceFault12Impl.class.getName());
     
+    public static final String RUNTIME_EXCEPTION_MESSAGE= "RuntimeException: Not supported yet.";
+    public static final String CHECKED_EXCEPTION_MESSAGE= "Shit happens, dontya?!";
+    
     @Override
     public HelloRuntimeExceptionResponse helloRuntimeException(HelloRuntimeExceptionRequest parameters) {
-        throw new RuntimeException("Not supported yet.");
+        throw new RuntimeException(RUNTIME_EXCEPTION_MESSAGE);
     }
 
     @Override
     public HelloCheckedExceptionResponse helloCheckedException(HelloCheckedExceptionRequest parameters) throws InternalErrorExceptionFault {
         InternalErrorException faultInfo = new InternalErrorException();
-        faultInfo.setMessage("shit happens, dontya?!");
-        throw new InternalErrorExceptionFault("Fack up, man", faultInfo, new IllegalStateException("deep-shit message, man"));
+        faultInfo.setMessage("Shit happens, dontya?!");
+        throw new InternalErrorExceptionFault(CHECKED_EXCEPTION_MESSAGE, faultInfo, new IllegalStateException("deep-shit message, man"));
     }
 
     @Override
