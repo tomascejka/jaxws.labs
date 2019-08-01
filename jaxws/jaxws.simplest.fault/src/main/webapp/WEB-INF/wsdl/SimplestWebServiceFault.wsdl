@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions name="SimpleFaultWsdl" targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz"
+<definitions name="SimplestFaultWsdl" targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz"
              xmlns:tns="http://api.fault.simplest.jaxws.javaee.learn.toce.cz"
              xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
@@ -118,7 +118,7 @@
     </message>    
     
     <!-- Ports -->
-    <portType name="SimpleWebServiceFaultPortType">
+    <portType name="SimplestWebServiceFaultPortType">
         <operation name="helloRuntimeException">
             <documentation>Metoda, kt. pri zpracovani vyhodi runtime exception</documentation>
             <input name="input1" message="tns:HelloExceptionIn"/>
@@ -143,7 +143,7 @@
     </portType>
     
     <!-- Bindings -->
-    <binding name="SimpleWebServiceFaultBindingSoap11Http" type="tns:SimpleWebServiceFaultPortType">
+    <binding name="SimplestWebServiceFaultBindingSoap11Http" type="tns:SimplestWebServiceFaultPortType">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="helloRuntimeException">
             <soap:operation style="document" soapAction=""/>
@@ -185,7 +185,8 @@
             </output>
         </operation>               
     </binding>
-    <binding name="SimpleWebServiceFaultBindingSoap12Http" type="tns:SimpleWebServiceFaultPortType">
+    
+    <binding name="SimplestWebServiceFaultBindingSoap12Http" type="tns:SimplestWebServiceFaultPortType">
         <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="helloRuntimeException">
             <soap12:operation style="document" soapAction="" soapActionRequired="false"/>
@@ -229,15 +230,15 @@
     </binding>
     
     <!-- Services -->
-    <service name="SimpleWebServiceFault">
+    <service name="SimplestWebServiceFault">
         <documentation>Simplest soap fault web service example - to demonstrated soap fault behaviour</documentation>
-        <port name="SimpleWebServiceFaultSoap11Http" binding="tns:SimpleWebServiceFaultBindingSoap11Http"><!-- ukazuje na binding[@name]-->
+        <port name="SimplestWebServiceFaultSoap11Http" binding="tns:SimplestWebServiceFaultBindingSoap11Http"><!-- ukazuje na binding[@name]-->
             <documentation>Soap fault example processing via soap 1.1 version</documentation>
-            <soap:address location="http://localhost:8080/ws/simplest/fault"/>
+            <soap:address location="http://localhost:8080/jax-ws/simplest/fault"/>
         </port>        
-        <port name="SimpleWebServiceFaultSoap12Http" binding="tns:SimpleWebServiceFaultBindingSoap12Http"><!-- ukazuje na binding[@name]-->
+        <port name="SimplestWebServiceFaultSoap12Http" binding="tns:SimplestWebServiceFaultBindingSoap12Http"><!-- ukazuje na binding[@name]-->
             <documentation>Soap fault example processing via soap 1.2 version</documentation>
-            <soap12:address location="http://localhost:8080/ws/simplest/fault"/>
+            <soap12:address location="http://localhost:8080/jax-ws/simplest/fault"/>
         </port>
     </service>
 </definitions>

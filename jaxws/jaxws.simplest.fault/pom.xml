@@ -46,7 +46,7 @@
                 <configuration>
                     <wsdlDirectory>${project.basedir}\src\main\webapp\WEB-INF\wsdl</wsdlDirectory>
                     <wsdlFiles>
-                        <wsdlFile>SimpleWebServiceFault.wsdl</wsdlFile>
+                        <wsdlFile>SimplestWebServiceFault.wsdl</wsdlFile>
                     </wsdlFiles>
                     <vmArgs>
                         <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>  

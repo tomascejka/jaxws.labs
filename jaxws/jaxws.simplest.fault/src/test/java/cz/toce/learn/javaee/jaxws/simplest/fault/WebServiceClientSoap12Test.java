@@ -4,13 +4,11 @@ import com.sun.xml.ws.fault.ServerSOAPFaultException;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorExceptionFault;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimpleWebServiceFault;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimpleWebServiceFaultPortType;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimplestWebServiceFault;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimplestWebServiceFaultPortType;
 import cz.toce.learn.javaee.jaxws.simplest.fault.server.SimpleWebServiceFault12Impl;
-import cz.toce.learn.javaee.jaxws.simplest.fault.server.WebServicePublisher;
 import java.net.URL;
 import javax.xml.ws.Endpoint;
-import org.hamcrest.Matcher;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -23,11 +21,11 @@ import org.junit.rules.ExpectedException;
  * 
  * @author tomas.cejka
  */
-public class WebServiceClientTest {
+public class WebServiceClientSoap12Test {
     
-    private static final String SERVICE_URL = "http://localhost:8081/ws/SimplestWebServiceFault";
+    private static final String SERVICE_URL = "http://localhost:8081/jax-ws/simplest/fault";
     private static Endpoint endpoint;
-    private SimpleWebServiceFaultPortType tested;
+    private SimplestWebServiceFaultPortType tested;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -39,9 +37,9 @@ public class WebServiceClientTest {
     
     @Before
     public void setUp() throws Exception {
-        URL wsdlLocation = new URL(WebServicePublisher.SERVICE_URL);
-        SimpleWebServiceFault service = new SimpleWebServiceFault(wsdlLocation);
-        tested = service.getSimpleWebServiceFaultSoap12Http();
+        URL wsdlLocation = new URL(SERVICE_URL);
+        SimplestWebServiceFault service = new SimplestWebServiceFault(wsdlLocation);
+        tested = service.getSimplestWebServiceFaultSoap12Http();
     }
     
     @Test(expected = ServerSOAPFaultException.class)

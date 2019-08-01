@@ -39,14 +39,14 @@ import javax.xml.ws.soap.SOAPFaultException;
  */
 @WebService(
         serviceName="SimplestWebServiceFault", // viz. /definitions/service[@name]
-        portName = "SimplestWebServiceFaultSoap12Http",// viz. /definitions/service/port[@name]
+        portName = "SimplestWebServiceFaultSoap11Http",// viz. /definitions/service/port[@name]
         targetNamespace = "http://api.fault.simplest.jaxws.javaee.learn.toce.cz", // viz. /definitions[@targetNamespace]
         endpointInterface = "cz.toce.learn.javaee.jaxws.simplest.fault.api.SimplestWebServiceFaultPortType" // viz. složenina, viz. targetNamespace + /definitions/portType[@name]
 )
-@BindingType(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
-public class SimpleWebServiceFault12Impl implements SimplestWebServiceFaultPortType {
+@BindingType(javax.xml.ws.soap.SOAPBinding.SOAP11HTTP_BINDING)
+public class SimpleWebServiceFault11Impl implements SimplestWebServiceFaultPortType {
 
-    private static final Logger LOG = Logger.getLogger(SimpleWebServiceFault12Impl.class.getName());
+    private static final Logger LOG = Logger.getLogger(SimpleWebServiceFault11Impl.class.getName());
     
     public static final String RUNTIME_EXCEPTION_MESSAGE= "RuntimeException: Not supported yet.";
     public static final String CHECKED_EXCEPTION_MESSAGE= "Shit happens, dontya?!";
