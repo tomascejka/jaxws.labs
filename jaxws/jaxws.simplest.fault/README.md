@@ -1,5 +1,5 @@
 # Simplest SOAP fault
-Studijní projekt pro případ, že chci nasimulovat soap fault chování. Cílem je **minimalistický** příklad užití *SOAP Fault*-u na obou stranách (*server*/*klient*).
+Studijní projekt pro případ, že chci nasimulovat soap fault chování. Cílem je **minimalistický** [příklad užití](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest.fault/SIMPLEST_USECASE.md) *SOAP Fault*-u na obou stranách (*server*/*klient*).
 
 *SOAP Fault* je chybový stav, který definuje specifikace SOAP [1,2]. V Java EE je SOAP specifikace popsána interní JSR specifikací *JSR-224: Java API for XML Web Services* (JAX-WS) [3].
 
