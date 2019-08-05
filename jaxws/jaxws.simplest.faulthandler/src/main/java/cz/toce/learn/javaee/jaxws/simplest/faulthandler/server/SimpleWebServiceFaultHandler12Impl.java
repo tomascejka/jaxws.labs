@@ -1,16 +1,7 @@
 package cz.toce.learn.javaee.jaxws.simplest.faulthandler.server;
 
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.InternalErrorExceptionFault;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.SimpleWebServiceFaultHandlerPortType;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloCheckedExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloCheckedExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloRuntimeExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloRuntimeExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloSoapFaultExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloSoapFaultExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloWebServiceExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.HelloWebServiceExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.InternalErrorException;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.*;
+import cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.model.*;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,9 +35,12 @@ import javax.xml.ws.soap.SOAPFaultException;
         endpointInterface = "cz.toce.learn.javaee.jaxws.simplest.faulthandler.api.SimpleWebServiceFaultHandlerPortType" // viz. složenina, viz. targetNamespace + /definitions/portType[@name]
 )
 @BindingType(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING)
-public class SimpleWebServiceFaultHandlerImpl implements SimpleWebServiceFaultHandlerPortType {
+public class SimpleWebServiceFaultHandler12Impl implements SimpleWebServiceFaultHandlerPortType {
 
-    private static final Logger LOG = Logger.getLogger(SimpleWebServiceFaultHandlerImpl.class.getName());
+    private static final Logger LOG = Logger.getLogger(SimpleWebServiceFaultHandler12Impl.class.getName());
+    
+    public static final String RUNTIME_EXCEPTION_MESSAGE= "RuntimeException: Not supported yet.";
+    public static final String CHECKED_EXCEPTION_MESSAGE= "Shit happens, dontya?!";
     
     @Override
     public HelloWebServiceExceptionResponse helloWebServiceException(HelloWebServiceExceptionRequest arg0) {
@@ -75,13 +69,13 @@ public class SimpleWebServiceFaultHandlerImpl implements SimpleWebServiceFaultHa
 
     @Override
     public HelloRuntimeExceptionResponse helloRuntimeException(HelloRuntimeExceptionRequest arg0) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(RUNTIME_EXCEPTION_MESSAGE);
     }
 
     @Override
     public HelloCheckedExceptionResponse helloCheckedException(HelloCheckedExceptionRequest arg0) throws InternalErrorExceptionFault {
         InternalErrorException faultInfo = new InternalErrorException();
         faultInfo.setMessage("shit happens, dontya?! (soap fault handler)");
-        throw new InternalErrorExceptionFault("Fack up, man (soap fault handler)", faultInfo, new IllegalStateException("deep-shit message (soap fault handler), man"));
+        throw new InternalErrorExceptionFault(CHECKED_EXCEPTION_MESSAGE, faultInfo, new IllegalStateException("deep-shit message (soap fault handler), man"));
     }
 }

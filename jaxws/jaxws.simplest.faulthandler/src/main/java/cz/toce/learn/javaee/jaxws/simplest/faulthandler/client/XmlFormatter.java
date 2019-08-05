@@ -1,4 +1,4 @@
-package cz.toce.learn.javaee.jaxws.simplest.faulthandler.tool;
+package cz.toce.learn.javaee.jaxws.simplest.faulthandler.client;
 
 import cz.toce.learn.javaee.jaxws.simplest.faulthandler.client.SimpleWebServiceSoapHandler;
 import java.io.IOException;

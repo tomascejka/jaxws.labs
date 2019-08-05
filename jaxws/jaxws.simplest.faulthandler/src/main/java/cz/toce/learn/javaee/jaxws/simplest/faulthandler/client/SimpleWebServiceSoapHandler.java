@@ -1,6 +1,5 @@
 package cz.toce.learn.javaee.jaxws.simplest.faulthandler.client;
 
-import cz.toce.learn.javaee.jaxws.simplest.faulthandler.tool.XmlFormatter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
