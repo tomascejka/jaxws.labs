@@ -17,7 +17,7 @@ mvn clean test
 **Figure 1** - zbuilduj projekt
 
 ### Publikování endpoint-u
-V případě, že potřebuješ testovat pomocí, např. soapui nástroje  - bude nutné vystavit WSDL. To lze spuštěním třídy ([WebServicePublisher.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest/src/main/java/cz/toce/learn/javaee/ws/simplest/fault/WebServicePublisher.java))
+V případě, že potřebuješ testovat pomocí, např. soapui nástroje  - bude nutné vystavit WSDL. To lze spuštěním třídy ([WebServicePublisher.java](https://github.com/tomascejka/jaxws.labs/blob/master/jaxws/jaxws.simplest.fault/src/main/java/cz/toce/learn/javaee/jaxws/simplest/fault/WebServicePublisher.java))
 
 ```
 start call mvn exec:java -Dexec.mainClass="cz.toce.learn.javaee.jaxws.simplest.fault.WebServicePublisher"
