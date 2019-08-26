@@ -1,120 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions name="SimplestFaultWsdl" targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz"
+<definitions name="SimplestWebServiceFaultWsdl" 
+             targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz"
              xmlns:tns="http://api.fault.simplest.jaxws.javaee.learn.toce.cz"
              xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
              xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-             xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl">
+             xmlns:api="http://model.api.fault.simplest.jaxws.javaee.learn.toce.cz">
     <!-- xTypes: via XSD-->
     <types>
-        <xsd:schema targetNamespace="http://api.fault.simplest.jaxws.javaee.learn.toce.cz" elementFormDefault="qualified">
-            <xsd:complexType name="HelloRequestType">
-                <xsd:sequence>
-                    <xsd:element name="greetings" type="xsd:string"/>
-                </xsd:sequence>
-            </xsd:complexType>
-            <xsd:complexType name="HelloResponseType">
-                <xsd:sequence>
-                    <xsd:element name="resultCode" type="xsd:string"/>
-                    <xsd:element name="resultText" type="xsd:string"/>
-                </xsd:sequence>
-            </xsd:complexType>           
-
-            <xsd:element name="HelloRuntimeExceptionRequest">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="tns:HelloRequestType"/>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="HelloRuntimeExceptionResponse">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="tns:HelloResponseType"/>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="HelloCheckedExceptionRequest">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="tns:HelloRequestType"/>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="HelloCheckedExceptionResponse">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="tns:HelloResponseType"/>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="HelloWebServiceExceptionRequest">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="tns:HelloRequestType"/>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="HelloWebServiceExceptionResponse">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="tns:HelloResponseType"/>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="HelloSoapFaultExceptionRequest">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="tns:HelloRequestType"/>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="HelloSoapFaultExceptionResponse">
-                <xsd:complexType>
-                    <xsd:complexContent>
-                        <xsd:extension base="tns:HelloResponseType"/>
-                    </xsd:complexContent>
-                </xsd:complexType>
-            </xsd:element>        
-            <xsd:element name="InternalErrorException">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element name="message" type="xsd:string"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
+        <xsd:schema elementFormDefault="qualified">
+            <xsd:import namespace="http://model.api.fault.simplest.jaxws.javaee.learn.toce.cz" schemaLocation="simplest.xsd"/>
         </xsd:schema>
     </types>
     
     <!-- Messages -->
     <message name="HelloExceptionIn">
-        <part name="parameters" element="tns:HelloRuntimeExceptionRequest"/>
+        <part name="parameters" element="api:HelloRuntimeExceptionRequest"/>
     </message>
     <message name="HelloExceptionOut">
-        <part name="parameters" element="tns:HelloRuntimeExceptionResponse"/>
+        <part name="parameters" element="api:HelloRuntimeExceptionResponse"/>
     </message>
     <message name="HelloCheckedExceptionIn">
-        <part name="parameters" element="tns:HelloCheckedExceptionRequest"/>
+        <part name="parameters" element="api:HelloCheckedExceptionRequest"/>
     </message>
     <message name="HelloCheckedExceptionOut">
-        <part name="parameters" element="tns:HelloCheckedExceptionResponse"/>
+        <part name="parameters" element="api:HelloCheckedExceptionResponse"/>
     </message>
     <message name="HelloWebServiceExceptionIn">
-        <part name="parameters" element="tns:HelloWebServiceExceptionRequest"/>
+        <part name="parameters" element="api:HelloWebServiceExceptionRequest"/>
     </message>
     <message name="HelloWebServiceExceptionOut">
-        <part name="parameters" element="tns:HelloWebServiceExceptionResponse"/>
+        <part name="parameters" element="api:HelloWebServiceExceptionResponse"/>
     </message>
     <message name="HelloSoapFaultExceptionIn">
-        <part name="parameters" element="tns:HelloSoapFaultExceptionRequest"/>
+        <part name="parameters" element="api:HelloSoapFaultExceptionRequest"/>
     </message>
     <message name="HelloSoapFaultExceptionOut">
-        <part name="parameters" element="tns:HelloSoapFaultExceptionResponse"/>
+        <part name="parameters" element="api:HelloSoapFaultExceptionResponse"/>
     </message>
     <message name="InternalErrorExceptionFault">
-        <part name="fault" element="tns:InternalErrorException"/>
+        <part name="fault" element="api:InternalErrorException"/>
     </message>    
     
     <!-- Ports -->

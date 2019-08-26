@@ -1,14 +1,14 @@
 package cz.toce.learn.javaee.jaxws.simplest.fault.server;
 
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloSoapFaultExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloSoapFaultExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloWebServiceExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloWebServiceExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorException;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloCheckedExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloCheckedExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloRuntimeExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloRuntimeExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloSoapFaultExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloSoapFaultExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloWebServiceExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloWebServiceExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.InternalErrorException;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorExceptionFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimplestWebServiceFaultPortType;
 import java.util.Locale;

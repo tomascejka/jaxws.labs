@@ -1,16 +1,16 @@
 package cz.toce.learn.javaee.jaxws.simplest.fault.server;
 
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloSoapFaultExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloSoapFaultExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloWebServiceExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloWebServiceExceptionResponse;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorException;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorExceptionFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimplestWebServiceFaultPortType;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloCheckedExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloCheckedExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloRuntimeExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloRuntimeExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloSoapFaultExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloSoapFaultExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloWebServiceExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloWebServiceExceptionResponse;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.InternalErrorException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +59,7 @@ public class SimpleWebServiceFault11Impl implements SimplestWebServiceFaultPortT
     @Override
     public HelloCheckedExceptionResponse helloCheckedException(HelloCheckedExceptionRequest parameters) throws InternalErrorExceptionFault {
         InternalErrorException faultInfo = new InternalErrorException();
-        faultInfo.setMessage("Shit happens, dontya?!");
+        faultInfo.setMessage("Shit happens (fault info), dontya?!");
         throw new InternalErrorExceptionFault(CHECKED_EXCEPTION_MESSAGE, faultInfo, new IllegalStateException("deep-shit message, man"));
     }
 
@@ -71,13 +71,14 @@ public class SimpleWebServiceFault11Impl implements SimplestWebServiceFaultPortT
     @Override
     public HelloSoapFaultExceptionResponse helloSoapFaultException(HelloSoapFaultExceptionRequest parameters) {
         try {
-            SOAPFactory soapFactory = SOAPFactory.newInstance( SOAPConstants.SOAP_1_2_PROTOCOL );
+            String nsUri = "http://api.fault.simplest.jaxws.javaee.learn.toce.cz";
+            SOAPFactory soapFactory = SOAPFactory.newInstance( SOAPConstants.SOAP_1_1_PROTOCOL );
             SOAPFault soapFault = soapFactory.createFault();
-            soapFault.appendFaultSubcode( new QName( "http://api.fault.simplest.jaxws.javaee.learn.toce.cz", "SomethingDefined" ) );
+            soapFault.appendFaultSubcode( new QName( nsUri, "SomethingDefined" ) );
             soapFault.setFaultRole( "http://api.fault.simplest.jaxws.javaee.learn.toce.cz/sample" );
             soapFault.addFaultReasonText( "SOAPFaultException happens.", Locale.getDefault() );
             Detail detail = soapFault.addDetail();
-            SOAPElement soapElement = detail.addChildElement( new QName( "http://api.fault.simplest.jaxws.javaee.learn.toce.cz", "SomeSpecificReason" ) );
+            SOAPElement soapElement = detail.addChildElement( new QName( nsUri, "SomeSpecificDetail" ) );
             soapElement.addTextNode( "TEST something detail section." );
             throw new SOAPFaultException( soapFault );
         } catch (SOAPException ex) {

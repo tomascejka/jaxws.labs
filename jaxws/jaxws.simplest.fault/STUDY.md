@@ -10,7 +10,7 @@ Podle manuálu [1] soap fault xml zprávy vypadají různě (obsahují jinak poj
 ## Ukázky SOAP fault zpráv
 Předpokládám, že checked výjimka níže uvedená (`UserDefinedFault`, viz. Figure 1) je definována v WSDL souboru (viz. odkaz[5]) - to je nutnost (tedy a pouze jenom pro checked/modeled chybové stavy).
 
-### Vyhození  checked výjimky v kódu
+### Vyhození checked výjimky v kódu
 V případech, kdy budeme používat "modeled" (checked exception) výjimku - tak ji lze vyhodit (viz. Figure 1) v programu (java) chybu[2], abychom mohli presentovat chování soap fault.
 ```
 //Generate the fault bean and specify the information you want marshlling
@@ -26,7 +26,7 @@ throw new UserDefinedException(
 *Figure 1* - příčina pádu v aplikaci - je vyhozena checked/modeled[6] výjimka (kt. je definována jako fault v WSDL[2])
 
 ### Vyhození runtime výjimky v kódu
-V případech, kdy budeme používat "unmodeled" (runtime exception) výjimku - tak ji lze vyhodit (viz. Figure 1) v programu (java) chybu[2], abychom mohli presentovat chování soap fault. Toto chování a mapování by default je užitečné, že dojde k chybě v knihovánách třetích stran, tzn. ne ve Vašech kódu, tzn. chybový stav v soap specifikaci je ošetřen a namapuje i výjimky, jejichž příčina není ve Vašem kódu.
+V případech, kdy budeme používat "unmodeled" (runtime exception) výjimku - tak ji lze vyhodit (viz. Figure 2) v programu (java) chybu[2], abychom mohli presentovat chování soap fault. Toto chování a mapování by default je užitečné, že dojde k chybě v knihovánách třetích stran, tzn. ne ve Vašech kódu, tzn. chybový stav v soap specifikaci je ošetřen a namapuje i výjimky, jejichž příčina není ve Vašem kódu.
 ```
 //runtime exception is thrown
 throw new IllegalArgumentException( "Something illegal." );

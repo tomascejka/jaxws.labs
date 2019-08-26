@@ -1,8 +1,8 @@
 package cz.toce.learn.javaee.jaxws.simplest.fault;
 
 import com.sun.xml.ws.fault.ServerSOAPFaultException;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloCheckedExceptionRequest;
-import cz.toce.learn.javaee.jaxws.simplest.fault.api.HelloRuntimeExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloCheckedExceptionRequest;
+import cz.toce.learn.javaee.jaxws.simplest.fault.api.model.HelloRuntimeExceptionRequest;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.InternalErrorExceptionFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimplestWebServiceFault;
 import cz.toce.learn.javaee.jaxws.simplest.fault.api.SimplestWebServiceFaultPortType;
