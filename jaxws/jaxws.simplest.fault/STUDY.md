@@ -28,7 +28,7 @@ throw new UserDefinedException(
 *Figure 1* - příčina pádu v aplikaci - je vyhozena checked/modeled[*6*] výjimka (kt. je definována jako fault v WSDL[*2*])
 
 ### Vyhození runtime výjimky v kódu
-V případech, kdy budeme používat "unmodeled" (runtime) výjimku - tak ji lze vyhodit (viz. *Figure 2*) v programu (java) chybu[*2*], abychom mohli presentovat chování soap fault. Toto chování a mapování výjimek "by default" je užitečné, pokud dojde k chybě v knihovnách třetích stran, tzn. chybový stav je v soap implementaci (jaxws-ri, apache cxf, metro apod.) ošetřen a namapuje výjimky, jejichž příčina není ve Vašem kódu.
+V případech, kdy budeme používat "unmodeled" (runtime) výjimku - tak ji lze vyhodit (viz. *Figure 2*) v programu (java) chybu[*2*], abychom mohli presentovat chování soap fault. Toto chování a mapování výjimek "by default" je užitečné, pokud dojde k chybě v knihovnách třetích stran, tzn. chybový stav je v soap implementacích ([jaxws-ri/metro](https://javaee.github.io/metro-jax-ws/ "Referenční implementace"), [apache cxf](https://cxf.apache.org/ "Výborná knihovna zakomponována v wildfly"), [apache axis](https://axis.apache.org/ "Další implementace") apod.) ošetřen a namapuje výjimky, jejichž příčina není ve Vašem kódu.
 ```
 //runtime exception is thrown
 throw new IllegalArgumentException( "Something illegal." );
