@@ -1,17 +1,19 @@
-﻿# STUDY - simplest soap fault
-## Rozdělení SOAP Fault dle typu
-Podle manuálu [1] soap fault xml zprávy vypadají různě (obsahují jinak pojmenované elementy) v SOAP versích (viz. dále). Dále dle zdroje [2] lze výjimky dělit na "Unmodeled"[6] a "Modeled"[7], což si lze vysvětlit několika způsoby jako:
+﻿# STUDY - soap fault
+## Rozdělení dle typu
+Podle manuálu[*1*] soap fault xml zprávy mají odlišnou strukturu (obsahují jinak pojmenované elementy) v SOAP versích (viz. dále). Dále dle zdroje[*2*] lze výjimky dělit na "Unmodeled"[*6*] a "Modeled"[*7*], což si lze vysvětlit několika způsoby jako:
 
-* "runtime==Unmodeled" a "checked=Modeled"  (technický pohled vývojáře) >> vytvoří se xsd struktura a vznikne výjimka, kt. je v throws definici (checked exception)
-* "technicalError==Unmodeled" a "businessError=Modeled" (analytický pohled) >> wsdl/soap java ee (dle [13]) implementace ji mapuji na javax.xml.ws.WebServiceException
+* "runtime==Unmodeled" a "checked=Modeled"  (pohled vývojáře) 
+* "technicalError==Unmodeled" a "businessError=Modeled" (pohled analytika)
+* v případě "Modeled" je nutné vytvořit popis výjimky v xsd schématu a poté jako fault ve wsdl a tím vznikne v api throws definice
+* v případě "Unmodeled" jsou mapovány na výjimku typu `javax.xml.ws.WebServiceException`
 
-... pokud to shrnu, tak jsou to všechno výjimky/chybové stavy, které WSDL specifiace[3,4] překládá dle SOAP specifikace[9,10] na SOAP Fault zprávy[11,12]. Podle WSDL specifikace je v případě "unmodeled" nutné takovou výjimku (chybový stav) deklarovat ve WSDL souboru (via WSDL binding SOAP [3,4]).
+... pokud to shrnu, tak jsou to všechno výjimky/chybové stavy, které WSDL specifiace[*3,4*] překládá dle SOAP specifikace[*9,10*] na SOAP Fault zprávy[*11,12*]. Podle WSDL specifikace je v případě "modeled" nutné takovou výjimku (chybový stav) deklarovat ve WSDL souboru (via WSDL binding SOAP [*3,4*]).
 
 ## Ukázky SOAP fault zpráv
-Předpokládám, že checked výjimka níže uvedená (`UserDefinedFault`, viz. Figure 1) je definována v WSDL souboru (viz. odkaz[5]) - to je nutnost (tedy a pouze jenom pro checked/modeled chybové stavy).
+Předpokládám, že checked výjimka níže uvedená (`UserDefinedFault`, viz. *Figure 1*) je definována v WSDL souboru (viz. odkaz[*5*]) - to je nutnost (tedy a pouze jenom pro checked/modeled chybové stavy).
 
 ### Vyhození checked výjimky v kódu
-V případech, kdy budeme používat "modeled" (checked exception) výjimku - tak ji lze vyhodit (viz. Figure 1) v programu (java) chybu[2], abychom mohli presentovat chování soap fault.
+V případech, kdy budeme používat "modeled" (checked exception) výjimku - tak ji lze vyhodit (viz. *Figure 1*) v programu (java) chybu[*2*], abychom mohli presentovat chování soap fault.
 ```
 //Generate the fault bean and specify the information you want marshlling
 UserDefinedFault fault = new UserDefinedFault();
@@ -23,10 +25,10 @@ fault.message = "Contact your administrator.";
 throw new UserDefinedException(
  "Something happens.", fault );
 ```
-*Figure 1* - příčina pádu v aplikaci - je vyhozena checked/modeled[6] výjimka (kt. je definována jako fault v WSDL[2])
+*Figure 1* - příčina pádu v aplikaci - je vyhozena checked/modeled[*6*] výjimka (kt. je definována jako fault v WSDL[*2*])
 
 ### Vyhození runtime výjimky v kódu
-V případech, kdy budeme používat "unmodeled" (runtime exception) výjimku - tak ji lze vyhodit (viz. Figure 2) v programu (java) chybu[2], abychom mohli presentovat chování soap fault. Toto chování a mapování by default je užitečné, že dojde k chybě v knihovánách třetích stran, tzn. ne ve Vašech kódu, tzn. chybový stav v soap specifikaci je ošetřen a namapuje i výjimky, jejichž příčina není ve Vašem kódu.
+V případech, kdy budeme používat "unmodeled" (runtime) výjimku - tak ji lze vyhodit (viz. *Figure 2*) v programu (java) chybu[*2*], abychom mohli presentovat chování soap fault. Toto chování a mapování výjimek "by default" je užitečné, pokud dojde k chybě v knihovnách třetích stran, tzn. chybový stav je v soap implementaci (jaxws-ri, apache cxf, metro apod.) ošetřen a namapuje výjimky, jejichž příčina není ve Vašem kódu.
 ```
 //runtime exception is thrown
 throw new IllegalArgumentException( "Something illegal." );
@@ -35,10 +37,10 @@ throw new IllegalArgumentException( "Something illegal." );
 
 Formát soap fault zpráv
 -----------------------
-Ukázky, jak vypadají xml soap fault zprávy. Dělím to dále dle typu vyjímek, které z webové služby mohou "vyletět". V případě Modeled výjimek použiji výše uvedenou - UserDefinedFault (viz. Figure 1).
+Ukázky, jak vypadají xml soap fault zprávy. Dělím to dále dle typu vyjímek, které z webové služby mohou "vyletět". V případě Modeled výjimek použiji výše uvedenou - `UserDefinedFault` (viz. *Figure 1*).
 
 ### Modeled výjimky (checked exception)
-Zdrojem mapování checked výjimek a jejich příkladů je odkaz. Takto vypadá soap fault dle SOAP 1.1
+Takto vypadá soap fault dle SOAP 1.1
 ```
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
@@ -59,7 +61,7 @@ Zdrojem mapování checked výjimek a jejich příkladů je odkaz. Takto vypadá
 ```
 *Figure 3* - SOAP Fault zpráva ve formátu deklarující SOAP v1.1
 
-Takto vypadá soap fault dle SOAP 1.2. Zpráva vždycky obsahuje definici obou SOAP versí (viz. namespace: ns2, ns3, viz. Figure 4 níže)
+Takto vypadá soap fault dle SOAP 1.2. Zpráva vždycky obsahuje definici obou SOAP versí (viz. namespace: ns2, ns3, viz. *Figure 4* níže)
 ```
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope">
@@ -87,10 +89,10 @@ Takto vypadá soap fault dle SOAP 1.2. Zpráva vždycky obsahuje definici obou S
 
 Unmodeled výjimky (runtime exception)
 -------------------------------------
-Zdrojem mapování checked výjimek a jejich příkladů je odkaz. Zdrojem/přičinou chyby je runtime výjimka, která může "vyletět" kdekoli v kódu, tzn. i mimo váš kod, např. v knihovnách třetích stran, např. aplikačním serveru a pod. 
+Zdrojem/přičinou chyby je runtime výjimka, která může "vyletět" kdekoli v kódu, např. v knihovnách třetích stran, tzn. aplikačním serveru apod.
 
 ### Runtime exception
-Přičinou je výjimka uvedená v Figure 2, viz. výše. Takto vypadá SOAP Fault dle SOAP 1.1
+Přičinou je výjimka uvedená v *Figure 2*, viz. výše. Takto vypadá SOAP Fault dle SOAP 1.1
 ```
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
@@ -104,7 +106,7 @@ Přičinou je výjimka uvedená v Figure 2, viz. výše. Takto vypadá SOAP Faul
 ```
 *Figure 5* - SOAP Fault zpráva ve formátu deklarující SOAP v1.1
 
-Takto vypadá SOAP Fault ve versi SOAP 1.2, opět obsahuje xml namespace z obou specifikaci (viz. namespace, ns2 a ns3, viz. Figure 6 níže)
+Takto vypadá SOAP Fault ve versi SOAP 1.2, opět obsahuje xml namespace z obou specifikaci (viz. namespace, ns2 a ns3, viz. *Figure 6* níže)
 ```
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope">
@@ -124,12 +126,12 @@ Takto vypadá SOAP Fault ve versi SOAP 1.2, opět obsahuje xml namespace z obou 
 *Figure 6* - SOAP Fault zpráva ve formátu deklarující SOAP v1.2
 
 ### javax.xml.ws.WebServiceException
-V případě, když namísto runtime exception vyhodíme javax.xml.ws.WebServiceException přímo (zdroj příkladu, zde). Tak výstupem jsou tyto formáty.
+V případě, když namísto runtime exception vyhodíme javax.xml.ws.WebServiceException přímo (viz. *Figure 7*).
 ```
 //javax.xml.ws.WebServiceException is thrown
 throw new javax.xml.ws.WebServiceException( "Web Service Exception." );
 ```
-Figure 7 - WebServiceException vyhozena v kódu
+*Figure 7* - WebServiceException vyhozena v kódu
 ```
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
@@ -141,7 +143,7 @@ Figure 7 - WebServiceException vyhozena v kódu
 	</S:Body>
 </S:Envelope>
 ```
-*Figure 8* - SOAP Fault zpráva (binding WebServiceException) dle SOAP 1.2
+*Figure 8* - SOAP Fault zpráva (binding WebServiceException) dle SOAP 1.1
 
 ```
 <?xml version="1.0" ?>
@@ -162,11 +164,12 @@ Figure 7 - WebServiceException vyhozena v kódu
 *Figure 9* - SOAP Fault zpráva (binding WebServiceException) dle SOAP 1.2 (opět obsahuje xml namespace obou SOAP versí, viz. ns2 a ns3)
 
 ### javax.xml.ws.soap.SOAPFaultException
-Toto je případ, kdy vyhodíme v kódu specifickou výjimku pro soap based api - javax.xml.ws.soap.SOAPFaultException (zdroj příkladu).
+Toto je případ, kdy vyhodíme v kódu specifickou výjimku pro soap based api - `javax.xml.ws.soap.SOAPFaultException`.
 
 #### SOAP Fault v1.1
 ```
-SOAPFault soapFault = ...;
+SOAPFactory soapFactory = SOAPFactory.newInstance( SOAPConstants.SOAP_1_1_PROTOCOL );
+SOAPFault soapFault = soapFactory.createFault();
 soapFault.setFaultCode( new QName( "http://sample.org", "UserDefined" ) );
 soapFault.setFaultActor( "http://example.com/sample" );
 soapFault.setFaultString( "SOAPFaultException happens." );
@@ -177,9 +180,8 @@ soapElement.addTextNode( "TEST." );
 //javax.xml.ws.soap.SOAPFaultException is thrown
 throw new SOAPFaultException( soapFault );
 ```
-*Figure 10* - SOAP Fault zpráva (binding SOAPFaultException) dle SOAP 1.1 specifikace vyhozena v kódu
+*Figure 10* - SOAP Fault zpráva (binding SOAPFaultException v1.1)
 
-Takto vypadá SOAP Fault pro SOAP v1.1
 ```
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
@@ -212,7 +214,6 @@ throw new SOAPFaultException( soapFault );
 ```
 *Figure 12* - SOAP Fault zpráva (binding SOAPFaultException) dle SOAP 1.2 specifikace vyhozena v kódu
 
-Takto vypadá SOAP Fault pro SOAP v1.2
 ```
 <?xml version="1.0" ?>
 <S:Envelope xmlns:S= "http://www.w3.org/2003/05/soap-envelope">
