@@ -1,13 +1,16 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <xsd:schema version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-            targetNamespace="http://model.api.handler.simplest.jaxws.javaee.learn.toce.cz"
-            xmlns:api="http://model.api.handler.simplest.jaxws.javaee.learn.toce.cz" 
+            targetNamespace="http://model.api.simplest.jaxws.javaee.learn.toce.cz"
+            xmlns:api="http://model.api.simplest.jaxws.javaee.learn.toce.cz" 
             elementFormDefault="qualified">
+    
+    <xsd:element name="HelloRequest" type="api:HelloRequestType"/>
     <xsd:complexType name="HelloRequestType">
         <xsd:sequence>
             <xsd:element name="greetings" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
+    <xsd:element name="HelloResponse" type="api:HelloResponseType"/>
     <xsd:complexType name="HelloResponseType">
         <xsd:sequence>
             <xsd:element name="resultCode" type="xsd:string"/>
@@ -76,21 +79,6 @@
             <xsd:sequence>
                 <xsd:element name="message" type="xsd:string"/>
             </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>           
-
-    <xsd:element name="HelloRequest">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="api:HelloRequestType"/>
-            </xsd:complexContent>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="HelloResponse">
-        <xsd:complexType>
-            <xsd:complexContent>
-                <xsd:extension base="api:HelloResponseType"/>
-            </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

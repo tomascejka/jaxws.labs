@@ -6,21 +6,17 @@
         <groupId>cz.toce.learn.javaee</groupId>
         <version>1.0.0</version>
     </parent>
-    
+  
     <groupId>cz.toce.learn.javaee</groupId>
-    <artifactId>jaxws.simplest.handler</artifactId>
+    <artifactId>jaxws.simplest.api.sei</artifactId>
     <version>1.0.0</version>
-    <packaging>war</packaging>
-    <description>Simplest implementation (top down approach) of soap java project with basic usage of soap handler</description>
-            
-    <properties>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-    </properties>
+    <packaging>jar</packaging>
+    <description>Simplest Service Endpoint Interface (SEI) implementation.</description>
     
     <dependencies>
         <dependency>
             <groupId>cz.toce.learn.javaee</groupId>
-            <artifactId>jaxws.simplest.sei</artifactId>
+            <artifactId>jaxws.simplest.api</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

@@ -68,7 +68,7 @@ public class SimpleWebServiceFaultHandler11Impl implements SimpleWebServiceFault
             SOAPFault soapFault = soapFactory.createFault();
             soapFault.setFaultString("SOAPFaultException happens.", Locale.getDefault());
             Detail detail = soapFault.addDetail();
-            SOAPElement soapElement = detail.addChildElement( new QName( WEB_SERVICE_TNS, "SomeSpecificReason" ) );
+            SOAPElement soapElement = detail.addChildElement( new QName( WEB_SERVICE_TNS, "SomeSpecificDetail" ) );
             soapElement.addTextNode( "TEST something detail section (soap fault handler)." );
             throw new SOAPFaultException( soapFault );
         } catch (SOAPException ex) {

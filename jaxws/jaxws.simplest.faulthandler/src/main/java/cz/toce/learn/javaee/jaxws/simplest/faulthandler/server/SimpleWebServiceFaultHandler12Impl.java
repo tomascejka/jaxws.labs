@@ -41,6 +41,18 @@ public class SimpleWebServiceFaultHandler12Impl implements SimpleWebServiceFault
     
     public static final String RUNTIME_EXCEPTION_MESSAGE= "RuntimeException: Not supported yet.";
     public static final String CHECKED_EXCEPTION_MESSAGE= "Shit happens, dontya?!";
+
+    @Override
+    public HelloRuntimeExceptionResponse helloRuntimeException(HelloRuntimeExceptionRequest arg0) {
+        throw new UnsupportedOperationException(RUNTIME_EXCEPTION_MESSAGE);
+    }
+
+    @Override
+    public HelloCheckedExceptionResponse helloCheckedException(HelloCheckedExceptionRequest arg0) throws InternalErrorExceptionFault {
+        InternalErrorException faultInfo = new InternalErrorException();
+        faultInfo.setMessage("shit happens, dontya?! (fault info)");
+        throw new InternalErrorExceptionFault(CHECKED_EXCEPTION_MESSAGE, faultInfo, new IllegalStateException("deep-shit message (soap fault handler), man"));
+    }
     
     @Override
     public HelloWebServiceExceptionResponse helloWebServiceException(HelloWebServiceExceptionRequest arg0) {
@@ -58,24 +70,12 @@ public class SimpleWebServiceFaultHandler12Impl implements SimpleWebServiceFault
             soapFault.setFaultRole( WEB_SERVICE_TNS+"/sampleRole" );
             soapFault.addFaultReasonText( "SOAPFaultException happens.", Locale.getDefault() );
             Detail detail = soapFault.addDetail();
-            SOAPElement soapElement = detail.addChildElement( new QName( WEB_SERVICE_TNS, "SomeSpecificReason" ) );
+            SOAPElement soapElement = detail.addChildElement( new QName( WEB_SERVICE_TNS, "SomeSpecificDetail" ) );
             soapElement.addTextNode( "TEST something detail section (soap fault handler)." );
             throw new SOAPFaultException( soapFault );
         } catch (SOAPException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    @Override
-    public HelloRuntimeExceptionResponse helloRuntimeException(HelloRuntimeExceptionRequest arg0) {
-        throw new UnsupportedOperationException(RUNTIME_EXCEPTION_MESSAGE);
-    }
-
-    @Override
-    public HelloCheckedExceptionResponse helloCheckedException(HelloCheckedExceptionRequest arg0) throws InternalErrorExceptionFault {
-        InternalErrorException faultInfo = new InternalErrorException();
-        faultInfo.setMessage("shit happens, dontya?! (soap fault handler)");
-        throw new InternalErrorExceptionFault(CHECKED_EXCEPTION_MESSAGE, faultInfo, new IllegalStateException("deep-shit message (soap fault handler), man"));
     }
 }

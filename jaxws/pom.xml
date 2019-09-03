@@ -75,9 +75,11 @@
     </build>
   
     <modules>
+        <module>jaxws.simplest.api</module>
+        <module>jaxws.simplest.api.sei</module>
         <module>jaxws.simplest.fault</module>
-        <module>jaxws.simplest.rpc</module>
         <module>jaxws.simplest.faulthandler</module>
         <module>jaxws.simplest.handler</module>
-  </modules>
+        <module>jaxws.simplest.rpc</module>
+    </modules>
 </project>
