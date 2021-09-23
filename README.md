@@ -11,7 +11,7 @@ Projekty zde uvedené je možné používat pro další účely, které uznáte 
 1. [Specifikace JAX-WS](https://jcp.org/en/jsr/detail?id=224)
 2. [Web Service Development Guide](http://itdoc.hitachi.co.jp/manuals/3020/30203Y2310e/EY230001.HTM)
 3. [Create a web service starting from a WSDL file using JAX-WS](http://java.boot.by/ocewsd6-guide/ch01s02.html)
-4 [JAX-WS Guide - Apache AXIS](https://axis.apache.org/axis2/java/core/docs/jaxws-guide.html)
+4. [JAX-WS Guide - Apache AXIS](https://axis.apache.org/axis2/java/core/docs/jaxws-guide.html)
 5. [WSDL Example Tutorial Test Sample SOAP Web Service](http://www.teqlog.com/wsdl-example-explained-step-by-step.html) - obsahuje různé verse WSDL (vhodné pro prototypování)
 6. [Maven](https://maven.apache.org/) nástroj, který pomáha vývojáři
 
