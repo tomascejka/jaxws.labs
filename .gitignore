@@ -30,3 +30,8 @@ jaxws/jaxws.simplest.rpc/target/jaxws.simplest.rpc-1.0.0-SNAPSHOT/WEB-INF/classe
 jaxws/jaxws.simplest.rpc/target/jaxws.simplest.rpc-1.0.0-SNAPSHOT/WEB-INF/classes/cz/toce/learn/javaee/ws/simplest/rpc/server/SimpleWebServiceImpl.class
 jaxws/jaxws.simplest.rpc/target/jaxws.simplest.rpc-1.0.0-SNAPSHOT/WEB-INF/classes/cz/toce/learn/javaee/ws/simplest/rpc/server/SimpleWebServicePortType.class
 jaxws/jaxws.simplest.rpc/target/jaxws.simplest.rpc-1.0.0-SNAPSHOT/WEB-INF/classes/cz/toce/learn/javaee/ws/simplest/rpc/server/WebServicePublisher.class
+/jaxws/jaxws.simplest.sei/target/
+/jaxws/simplest.api/target/
+/jaxws/jaxws.simplest.api/target/
+/jaxws/jaxws.simplest.api.sei/target/
+/jaxws/jaxws.simplest.api.sei/nb-configuration.xml
