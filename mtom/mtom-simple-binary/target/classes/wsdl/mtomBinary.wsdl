@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="fileStorageBinary"
+             targetNamespace="http://ws.learn.tc.cz/mtom/binary/api"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://ws.learn.tc.cz/mtom/binary/api"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:xsd1="http://ws.learn.tc.cz/mtom/binary/types/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!--
+    WSDL zdroje (motivace):
+    @see https://access.redhat.com/documentation/en-us/red_hat_fuse/7.5/html/apache_cxf_development_guide/fusecxfmtom
+    @see https://access.redhat.com/documentation/en-us/red_hat_fuse/7.5/html/apache_cxf_development_guide/fusecxfswa
+    @see https://www.sitepoint.com/mime-types-complete-list/
+    -->
+    <types>
+        <schema targetNamespace="http://ws.learn.tc.cz/mtom/binary/types/"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+            <complexType name="fileBinaryType">
+                <sequence>
+                    <element name="fileName" type="xsd:string" />
+                    <element name="contentData" type="xsd:base64Binary" />
+                </sequence>
+            </complexType>
+            <element name="fileBinary" type="xsd1:fileBinaryType" />
+        </schema>
+    </types>
+
+    <!-- EXCHANGE of (binary) FILE -->
+    <message name="storageUploadBinaryRequest">
+        <part name="file" element="xsd1:fileBinary"/>
+    </message>
+    <message name="storageUploadBinaryResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+    <message name="storageDownloadBinaryRequest">
+        <part name="filenameBinary" type="xsd:string"/>
+    </message>
+    <message name="storageDownloadBinaryResponse">
+        <part name="success" element="xsd1:fileBinary"/>
+    </message>
+
+    <portType name="fileStorageBinaryPort">
+        <!-- EXCHANGE of (binary) FILE -->
+        <operation name="uploadBinary">
+            <input message="tns:storageUploadBinaryRequest" name="storageUploadBinaryRequest"/>
+            <output message="tns:storageUploadBinaryResponse" name="storageUploadBinaryResponse"/>
+        </operation>
+        <operation name="downloadBinary">
+            <input message="tns:storageDownloadBinaryRequest" name="storageDownloadBinaryRequest"/>
+            <output message="tns:storageDownloadBinaryResponse" name="storageDownloadBinaryResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="fileStorageBinaryBinding" type="tns:fileStorageBinaryPort">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <!-- EXCHANGE of (binary) FILE -->
+        <operation name="uploadBinary">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storageUploadBinaryRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storageUploadBinaryResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="downloadBinary">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storageDownloadBinaryRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storageDownloadBinaryResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="fileStorageBinaryService">
+        <port binding="tns:fileStorageBinaryBinding" name="fileStorageBinaryServicePort">
+            <soap12:address location="http://localhost:8080/mtom.ws/fileStorageBinaryService"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,4 @@
+# Created at 2022-05-02T06:36:22.412
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Repositories\labs\jaxws.labs\mtom\mtom-simple-binary\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+
