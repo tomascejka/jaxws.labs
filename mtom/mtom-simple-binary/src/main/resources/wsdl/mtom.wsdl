@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="FileStorage"
+             targetNamespace="http://ws.learn.tc.cz/mtom/api"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://ws.learn.tc.cz/mtom/api"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:xsd1="http://ws.learn.tc.cz/mtom/types/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+    <!--
+    WSDL zdroje (motivace):
+    @see https://access.redhat.com/documentation/en-us/red_hat_fuse/7.5/html/apache_cxf_development_guide/fusecxfmtom
+    @see https://access.redhat.com/documentation/en-us/red_hat_fuse/7.5/html/apache_cxf_development_guide/fusecxfswa
+    @see https://www.sitepoint.com/mime-types-complete-list/
+    -->
+    <types>
+        <schema targetNamespace="http://ws.learn.tc.cz/mtom/types/"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+            <complexType name="xFileType">
+                <sequence>
+                    <element name="fileName" type="xsd:string" />
+                    <element name="contentData" type="xsd:base64Binary" />
+                </sequence>
+            </complexType>
+            <complexType name="xFileOctetStreamType">
+                <sequence>
+                    <element name="fileName" type="xsd:string" />
+                    <element name="contentData" type="xsd:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+                </sequence>
+            </complexType>
+            <complexType name="xFileXmlType">
+                <sequence>
+                    <element name="fileName" type="xsd:string" />
+                    <element name="contentData" type="xsd:base64Binary" xmime:expectedContentTypes="application/xml"/>
+                </sequence>
+            </complexType>
+            <complexType name="xFilePdfType">
+                <sequence>
+                    <element name="fileName" type="xsd:string" />
+                    <element name="contentData" type="xsd:base64Binary" xmime:expectedContentTypes="application/pdf"/>
+                </sequence>
+            </complexType>
+            <complexType name="xFileTxtType">
+                <sequence>
+                    <element name="fileName" type="xsd:string" />
+                    <element name="contentData" type="xsd:base64Binary" xmime:expectedContentTypes="plain/txt"/>
+                </sequence>
+            </complexType>
+            <complexType name="xFileJpgType">
+                <sequence>
+                    <element name="fileName" type="xsd:string" />
+                    <element name="contentData" type="xsd:base64Binary" xmime:expectedContentTypes="image/jpeg"/>
+                </sequence>
+            </complexType>
+            <element name="xFileBinary" type="xsd1:xFileType" />
+            <element name="xFileOctetStream" type="xsd1:xFileOctetStreamType" />
+            <element name="xFileSourceXml" type="xsd1:xFileXmlType" />
+            <element name="xFileSourcePdf" type="xsd1:xFilePdfType" />
+            <element name="xFileSourceTxt" type="xsd1:xFileTxtType" />
+            <element name="xFileSourceJpg" type="xsd1:xFileJpgType" />
+        </schema>
+    </types>
+
+    <!-- EXCHANGE of (binary) FILE -->
+    <message name="storageUploadBinaryRequest">
+        <part name="file" element="xsd1:xFileBinary"/>
+    </message>
+    <message name="storageUploadBinaryResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+    <message name="storageDownloadBinaryRequest">
+        <part name="filenameBinary" type="xsd:string"/>
+    </message>
+    <message name="storageDownloadBinaryResponse">
+        <part name="success" element="xsd1:xFileBinary"/>
+    </message>
+    <!-- 
+    EXCHANGE of (application/octet-stream) FILE 
+    @see https://www.rfc-editor.org/rfc/rfc2046.html
+    @see https://www.rfc-editor.org/rfc/rfc2046.html#section-4.5.1
+    @see https://www.rfc-editor.org/rfc/rfc2046.html#section-5.2.4
+    -->
+    <message name="storageUploadOctetStreamRequest">
+        <part name="file" element="xsd1:xFileOctetStream"/>
+    </message>
+    <message name="storageUploadOctetStreamResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+    <message name="storageDownloadOctetStreamRequest">
+        <part name="filenameStream" type="xsd:string"/>
+    </message>
+    <message name="storageDownloadOctetStreamResponse">
+        <part name="success" element="xsd1:xFileOctetStream"/>
+    </message>
+    <!-- EXCHANGE of (application/xml) FILE -->
+    <message name="storageUploadXmlRequest">
+        <part name="file" element="xsd1:xFileSourceXml"/>
+    </message>
+    <message name="storageUploadXmlResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+    <message name="storageDownloadXmlRequest">
+        <part name="filenameXml" type="xsd:string"/>
+    </message>
+    <message name="storageDownloadXmlResponse">
+        <part name="success" element="xsd1:xFileSourceXml"/>
+    </message>
+
+    <portType name="xFileStoragePort">
+        <!-- EXCHANGE of (binary) FILE -->
+        <operation name="uploadBinary">
+            <input message="tns:storageUploadBinaryRequest" name="storageUploadBinaryRequest"/>
+            <output message="tns:storageUploadBinaryResponse" name="storageUploadBinaryResponse"/>
+        </operation>
+        <operation name="downloadBinary">
+            <input message="tns:storageDownloadBinaryRequest" name="storageDownloadBinaryRequest"/>
+            <output message="tns:storageDownloadBinaryResponse" name="storageDownloadBinaryResponse"/>
+        </operation>
+        <!-- EXCHANGE of (application/octet-stream) FILE -->
+        <operation name="uploadOctetStream">
+            <input message="tns:storageUploadOctetStreamRequest" name="storageUploadOctetStreamRequest"/>
+            <output message="tns:storageUploadOctetStreamResponse" name="storageUploadOctetStreamResponse"/>
+        </operation>
+        <operation name="downloadOctetStream">
+            <input message="tns:storageDownloadOctetStreamRequest" name="storageDownloadOctetStreamRequest"/>
+            <output message="tns:storageDownloadOctetStreamResponse" name="storageDownloadOctetStreamResponse"/>
+        </operation>
+        <!-- EXCHANGE of (application/xml) FILE -->
+        <operation name="uploadXml">
+            <input message="tns:storageUploadXmlRequest" name="storageUploadXmlRequest"/>
+            <output message="tns:storageUploadXmlResponse" name="storageUploadXmlResponse"/>
+        </operation>
+        <operation name="downloadXml">
+            <input message="tns:storageDownloadXmlRequest" name="storageDownloadXmlRequest"/>
+            <output message="tns:storageDownloadXmlResponse" name="storageDownloadXmlResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="xFileStorageBinding" type="tns:xFileStoragePort">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <!-- EXCHANGE of (binary) FILE -->
+        <operation name="uploadBinary">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storageUploadBinaryRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storageUploadBinaryResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="downloadBinary">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storageDownloadBinaryRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storageDownloadBinaryResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <!-- EXCHANGE of (application/octet-stream) FILE -->
+        <operation name="uploadOctetStream">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storageUploadOctetStreamRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storageUploadOctetStreamResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="downloadOctetStream">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storageDownloadOctetStreamRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storageDownloadOctetStreamResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <!-- EXCHANGE of (application/xml) FILE -->
+        <operation name="uploadXml">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storageUploadXmlRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storageUploadXmlResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="downloadXml">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storageDownloadXmlRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storageDownloadXmlResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="xFileStorageService">
+        <port binding="tns:xFileStorageBinding" name="xFileStorageServicePort">
+            <soap12:address location="http://localhost:8080/mtom.ws/xFileStorageService"/>
+        </port>
+    </service>
+</definitions>

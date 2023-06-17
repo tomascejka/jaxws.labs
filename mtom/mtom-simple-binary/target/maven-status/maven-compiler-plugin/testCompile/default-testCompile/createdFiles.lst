@@ -1,0 +1,10 @@
+cz\tc\learn\ws\mtom\binary\FileStorageBinaryServiceImplV4Test.class
+cz\tc\learn\ws\mtom\stream\FileStorageStreamServiceImplV2Test.class
+cz\tc\learn\ws\mtom\binary\BaseBinaryTest.class
+cz\tc\learn\ws\mtom\stream\FileStorageStreamServiceImplV3Test.class
+cz\tc\learn\mtom\XFileStoragePortImplTest.class
+cz\tc\learn\ws\mtom\stream\FileStorageStreamServiceImplTest.class
+cz\tc\learn\ws\mtom\optimize\FileStorageStreamOptimizeServiceImplTest.class
+cz\tc\learn\ws\mtom\binary\FileStorageBinaryServiceImplV2Test.class
+cz\tc\learn\ws\mtom\binary\FileStorageBinaryServiceImplV3Test.class
+cz\tc\learn\ws\mtom\binary\FileStorageBinaryServiceImplTest.class

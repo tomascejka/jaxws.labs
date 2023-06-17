@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="XrayStorage"
+             targetNamespace="http://mediStor.org/x-rays"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://mediStor.org/x-rays"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:xsd1="http://mediStor.org/types/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!--
+    WSDL zdroje:
+        @see https://access.redhat.com/documentation/en-us/red_hat_fuse/7.5/html/apache_cxf_development_guide/fusecxfmtom
+        @see https://access.redhat.com/documentation/en-us/red_hat_fuse/7.5/html/apache_cxf_development_guide/fusecxfswa
+    -->
+    <types>
+        <schema targetNamespace="http://mediStor.org/types/"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+            <complexType name="xRayType">
+                <sequence>
+                    <element name="patientName" type="xsd:string" />
+                    <element name="patientNumber" type="xsd:int" />
+                    <element name="imageData" type="xsd:base64Binary" />
+                </sequence>
+            </complexType>
+            <element name="xRay" type="xsd1:xRayType" />
+        </schema>
+    </types>
+
+    <message name="storRequest">
+        <part name="record" element="xsd1:xRay"/>
+    </message>
+    <message name="storResponse">
+        <part name="success" type="xsd:boolean"/>
+    </message>
+
+    <portType name="xRayStoragePort">
+        <operation name="store">
+            <input message="tns:storRequest" name="storRequest"/>
+            <output message="tns:storResponse" name="storResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="xRayStorageBinding" type="tns:xRayStoragePort">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="store">
+            <soap12:operation soapAction="" style="document"/>
+            <input name="storRequest">
+                <soap12:body use="literal"/>
+            </input>
+            <output name="storResponse">
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="xRayStorageService">
+        <port binding="tns:xRayStorageBinding" name="xRayStorageServicePort">
+            <soap12:address location="http://localhost:8080/mtom.ws/xRayStorageService"/>
+        </port>
+    </service>
+</definitions>
