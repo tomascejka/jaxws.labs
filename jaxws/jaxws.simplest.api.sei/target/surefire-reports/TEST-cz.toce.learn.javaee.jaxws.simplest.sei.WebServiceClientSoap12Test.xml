@@ -1,73 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" time="0.261" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" time="0.2" errors="0" skipped="0">
   <properties>
-    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="sun.boot.library.path" value="D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\bin"/>
-    <property name="java.vm.version" value="25.292-b10"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="F:\Tools\jdk\oracle\jdk1.8.0_221\jre\bin"/>
+    <property name="java.vm.version" value="25.221-b11"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="D:\Repositories\labs\jaxws.labs\jaxws"/>
+    <property name="maven.multiModuleProjectDirectory" value="F:\Repositories\labs\jaxws.labs\jaxws"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
-    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="user.script" value=""/>
     <property name="user.country" value="CZ"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.os.patch.level" value=""/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="D:\Repositories\labs\jaxws.labs\jaxws"/>
-    <property name="java.runtime.version" value="1.8.0_292-b10"/>
+    <property name="user.dir" value="F:\Repositories\labs\jaxws.labs\jaxws"/>
+    <property name="java.runtime.version" value="1.8.0_221-b11"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\endorsed"/>
+    <property name="java.endorsed.dirs" value="F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="C:\Users\TOMASC~1.STY\AppData\Local\Temp\"/>
+    <property name="java.io.tmpdir" value="C:\Users\tomas.cejka.STYRAX\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
-    <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="D:\Tools\maven\apache-maven-3.6.3\bin\..\bin\m2.conf"/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="maven.ext.class.path" value="F:\Tools\netbeans\netbeans-10.0\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="F:\Tools\netbeans\netbeans-10.0\java\maven\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1250"/>
-    <property name="java.library.path" value="D:\Tools\jdk\openjdk\jdk-8u292-b10\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Common Files\Acronis\SnapAPI\;C:\Program Files (x86)\Acronis\CommandLineTool\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\TortoiseGit\bin;E:\Portable\coreutils-5.3.0\bin;E:\Tools\jdk\openjdk\jdk-11\bin;E:\Tools\groovy\groovy-4.0.0\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;D:\Tools\maven\apache-maven-3.6.3\bin;D:\Tools\vscode\v1.52.1;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\OpenSSL\bin;C:\Program Files\PowerShell\7\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Git\cmd;C:\Users\tomas.cejka.STYRAX\AppData\Local\Microsoft\WindowsApps;C:\Users\tomas.cejka.STYRAX\AppData\Local\GitHubDesktop\bin;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Git;D:\Portable\jbake\jbake-2.6.5-bin\bin;C:\Users\tomas.cejka.STYRAX\AppData\Local\fman;%PyCharm%;C:\Users\tomas.cejka.STYRAX\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\Common Files\Acronis\TibMounter64;."/>
-    <property name="maven.conf" value="D:\Tools\maven\apache-maven-3.6.3\bin\../conf"/>
+    <property name="java.library.path" value="F:\Tools\jdk\oracle\jdk1.8.0_221\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files (x86)\Common Files\Acronis\SnapAPI\;C:\Program Files (x86)\Acronis\CommandLineTool\;C:\Program Files (x86)\Gow\bin;f:\Scripts\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\TortoiseGit\bin;C:\Program Files\OpenVPN\bin;C:\ProgramData\chocolatey\bin;f:\Tools\python-3.5.3;f:\Tools\python-3.5.3\Scripts;f:\Tools\cmder ;C:\Users\tomas.cejka.STYRAX\.azure-kubectl;f:\Tools\helm-v2.11;f:\Tools\mysql_shell-v8.0.13\bin;C:\Program Files\Oracle\VirtualBox\;f:\Tools\jbake-2.6.4\bin;f:\Portable\graphviz-2.38\bin;f:\Tools\soa-model\bin;C:\Program Files\Git\cmd;f:\Tools\jdk\oracle\jdk-11\bin;C:\Program Files\Git\bin;F:\Tools\apache-maven\apache-maven-3.6.3\bin;c:\Program Files\TortoiseSVN\bin;C:\Program Files\Docker Toolbox;F:\Portable\markdownMonster\Markdown Monster;C:\Program Files (x86)\Common Files\Acronis\TibMounter64;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="10.0"/>
-    <property name="library.jansi.path" value="D:\Tools\maven\apache-maven-3.6.3\bin\..\lib\jansi-native"/>
+    <property name="os.version" value="6.1"/>
     <property name="user.home" value="C:\Users\tomas.cejka.STYRAX"/>
     <property name="user.timezone" value="Europe/Prague"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
-    <property name="file.encoding" value="Cp1250"/>
+    <property name="file.encoding" value="UTF-8"/>
     <property name="user.name" value="tomas.cejka"/>
-    <property name="java.class.path" value="D:\Tools\maven\apache-maven-3.6.3\bin\..\boot\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.class.path" value="F:\Tools\netbeans\netbeans-10.0\java\maven\boot\plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="D:\Tools\jdk\openjdk\jdk-8u292-b10\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean package"/>
+    <property name="java.home" value="F:\Tools\jdk\oracle\jdk1.8.0_221\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=F:\Tools\netbeans\netbeans-10.0\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="cs"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.version" value="1.8.0_292"/>
-    <property name="java.ext.dirs" value="D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
-    <property name="sun.boot.class.path" value="D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\resources.jar;D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\rt.jar;D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\sunrsasign.jar;D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\jsse.jar;D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\jce.jar;D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\charsets.jar;D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\lib\jfr.jar;D:\Tools\jdk\openjdk\jdk-8u292-b10\jre\classes"/>
-    <property name="sun.stderr.encoding" value="cp852"/>
+    <property name="java.version" value="1.8.0_221"/>
+    <property name="java.ext.dirs" value="F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\resources.jar;F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\rt.jar;F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\sunrsasign.jar;F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\jsse.jar;F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\jce.jar;F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\charsets.jar;F:\Tools\jdk\oracle\jdk1.8.0_221\jre\lib\jfr.jar;F:\Tools\jdk\oracle\jdk1.8.0_221\jre\classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="D:\Tools\maven\apache-maven-3.6.3\bin\.."/>
+    <property name="maven.home" value="F:\Tools\netbeans\netbeans-10.0\java\maven"/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="sun.stdout.encoding" value="cp852"/>
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHelloRuntimeExceptionWithMessage" time="0.13"/>
-  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHello" time="0"/>
-  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHelloCheckedExceptionWithMessage" time="0.033"/>
-  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHelloCheckedException" time="0.032"/>
-  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHelloRuntimeException" time="0.066"/>
+  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHelloRuntimeExceptionWithMessage" time="0.048"/>
+  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHello" time="0.032"/>
+  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHelloCheckedExceptionWithMessage" time="0.044"/>
+  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHelloCheckedException" time="0.041"/>
+  <testcase classname="cz.toce.learn.javaee.jaxws.simplest.sei.WebServiceClientSoap12Test" name="testHelloRuntimeException" time="0.035"/>
 </testsuite>

@@ -19,7 +19,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "SimplestWebServiceApi", targetNamespace = "http://api.simplest.jaxws.javaee.learn.toce.cz", wsdlLocation = "file:/D:/Repositories/labs/jaxws.labs/jaxws/jaxws.simplest.api/src/main/resources/META-INF/wsdl/SimplestWebServiceApi.wsdl")
+@WebServiceClient(name = "SimplestWebServiceApi", targetNamespace = "http://api.simplest.jaxws.javaee.learn.toce.cz", wsdlLocation = "file:/F:/Repositories/labs/jaxws.labs/jaxws/jaxws.simplest.api/src/main/resources/META-INF/wsdl/SimplestWebServiceApi.wsdl")
 public class SimplestWebServiceApi
     extends Service
 {
@@ -32,7 +32,7 @@ public class SimplestWebServiceApi
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/D:/Repositories/labs/jaxws.labs/jaxws/jaxws.simplest.api/src/main/resources/META-INF/wsdl/SimplestWebServiceApi.wsdl");
+            url = new URL("file:/F:/Repositories/labs/jaxws.labs/jaxws/jaxws.simplest.api/src/main/resources/META-INF/wsdl/SimplestWebServiceApi.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
