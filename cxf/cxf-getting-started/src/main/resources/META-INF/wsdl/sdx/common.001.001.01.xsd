@@ -1,0 +1,2296 @@
+<?xml version="1.0" ?><!-- edited with XMLSpy v2013 sp1 (x64) (http://www.altova.com) by STYRAX, a.s. (STYRAX, a.s.) --><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns="http://cmn.sodexo.cz/type/common" elementFormDefault="qualified" targetNamespace="http://cmn.sodexo.cz/type/common">
+	<xs:complexType name="Account">
+		<xs:sequence>
+			<xs:element name="AccountId" type="AccountId">
+				<xs:annotation>
+					<xs:documentation>Interní identifikátor účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccountNumber" type="AccountNumber">
+				<xs:annotation>
+					<xs:documentation>Externí identifikátor účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="AccountType">
+				<xs:annotation>
+					<xs:documentation>Typ účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="AccountStatus">
+				<xs:annotation>
+					<xs:documentation>Stav účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastStatusUpdate" type="ISODateTime">
+				<xs:annotation>
+					<xs:documentation>Datum a čas poslední změny stavu účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Balance" type="Balance">
+				<xs:annotation>
+					<xs:documentation>Zůstatek na účtu včetně nespotřebovaných eVoucherů</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrencyCode" type="CurrencyCode">
+				<xs:annotation>
+					<xs:documentation>Kód měny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AvailableBalance" type="Balance">
+				<xs:annotation>
+					<xs:documentation>Disponibilní zůstatek na účtu, částky blokované eVouchery v neterminálním stavu se nazapočítávají.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Issue" type="AccountIssue">
+				<xs:annotation>
+					<xs:documentation>Aktuální zůstatky a expirace kreditu po emisích</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Card" type="Card">
+				<xs:annotation>
+					<xs:documentation>Karty evidované k účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Limit" type="AccountLimit">
+				<xs:annotation>
+					<xs:documentation>Aktuální hodnota čerpání denního limitu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AccountId">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AccountInfo">
+		<xs:sequence>
+			<xs:element name="AccountId" type="AccountId">
+				<xs:annotation>
+					<xs:documentation>Interní identifikátor účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EmployeeCode" type="EmployeeCode">
+				<xs:annotation>
+					<xs:documentation>Kód zaměstnance, kterému  účet patří.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyCode" type="CompanyCode">
+				<xs:annotation>
+					<xs:documentation>Kód společnosti zaměstnance, kterému patří.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccountNumber" type="AccountNumber">
+				<xs:annotation>
+					<xs:documentation>Externí identifikátor účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="AccountType">
+				<xs:annotation>
+					<xs:documentation>Typ účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="AccountStatus">
+				<xs:annotation>
+					<xs:documentation>Stav účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastStatusUpdate" type="ISODateTime">
+				<xs:annotation>
+					<xs:documentation>Datum a čas poslední změny stavu účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SodexoBlock" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Příznak, že je účet blokovaný Sodexem (tj. v DB buď SPO nebo AM) v AM. V CM je účet vždy aktivní.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountIssue">
+		<xs:sequence>
+			<xs:element name="IssueTypeName" type="IssueName">
+				<xs:annotation>
+					<xs:documentation>Název typu emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Balance" type="Balance">
+				<xs:annotation>
+					<xs:documentation>Zůstatek na účtu včetně nespotřebovaných eVoucherů v daném typu emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrencyCode" type="CurrencyCode">
+				<xs:annotation>
+					<xs:documentation>Kód měny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AvailableBalance" type="Balance">
+				<xs:annotation>
+					<xs:documentation>Disponibilní zůstatek na účtu v daném typu emise, částky blokované eVouchery v neterminálním stavu se nazapočítávají.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="NextExpirationAmount" type="Balance">
+				<xs:annotation>
+					<xs:documentation>Hodnota nejblíže expirujícího kredituv daném typu emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="NextExpirationDate" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum expirace nejblíže expirujícího kreditu v danom typu emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountLimit">
+		<xs:sequence>
+			<xs:element name="LimitType" type="AccountLimitType">
+				<xs:annotation>
+					<xs:documentation>Typ limitu účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" type="AccountLimitValue">
+				<xs:annotation>
+					<xs:documentation>Hodnota limitu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="AccountLimitValue">
+				<xs:annotation>
+					<xs:documentation>Stav čerpání daného limitu na účtu.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AccountLimitType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CARD_TRX_AMOUNT_MAX"></xs:enumeration>
+			<xs:enumeration value="CARD_TRX_AMOUNT_MIN"></xs:enumeration>
+			<xs:enumeration value="CARD_TRX_AMOUNT_DAY"></xs:enumeration>
+			<xs:enumeration value="CARD_TRX_AMOUNT_WEEK"></xs:enumeration>
+			<xs:enumeration value="CARD_TRX_AMOUNT_MONTH"></xs:enumeration>
+			<xs:enumeration value="CARD_TRX_COUNT_DAY"></xs:enumeration>
+			<xs:enumeration value="CARD_TRX_COUNT_WEEK"></xs:enumeration>
+			<xs:enumeration value="CARD_TRX_COUNT_MONTH"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_TRX_AMOUNT_MAX"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_TRX_AMOUNT_MIN"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_TRX_AMOUNT_DAY"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_TRX_AMOUNT_WEEK"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_TRX_AMOUNT_MONTH"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_TRX_COUNT_DAY"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_TRX_COUNT_WEEK"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_TRX_COUNT_MONTH"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_BALANCE_MAX"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_CREDIT_MAX"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_CREDIT_DAY"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_CREDIT_WEEK"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_CREDIT_MONTH"></xs:enumeration>
+			<xs:enumeration value="ACCOUNT_CREDIT_YEAR"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountLimitValue">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="16"></xs:totalDigits>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountNumber">
+		<xs:annotation>
+			<xs:documentation>Externí identifikátor účtu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="12"></xs:minLength>
+			<xs:maxLength value="12"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountStatus">
+		<xs:annotation>
+			<xs:documentation>Account status enum</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACTIVE">
+				<xs:annotation>
+					<xs:documentation>aktivní</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLOCKED">
+				<xs:annotation>
+					<xs:documentation>blokovaný</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLOSED">
+				<xs:annotation>
+					<xs:documentation>uzavřený</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLOSING">
+				<xs:annotation>
+					<xs:documentation>uzavírá se</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountTransactionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREDIT"></xs:enumeration>
+			<xs:enumeration value="MANUAL_CREDIT"></xs:enumeration>
+			<xs:enumeration value="PURCHASE"></xs:enumeration>
+			<xs:enumeration value="REVERSAL"></xs:enumeration>
+			<xs:enumeration value="CLOSE_ACCOUNT"></xs:enumeration>
+			<xs:enumeration value="MANUAL_DEBIT"></xs:enumeration>
+			<xs:enumeration value="CREDIT_EXPIRE"></xs:enumeration>
+			<xs:enumeration value="PAYMENT_COMPLAINT"></xs:enumeration>
+			<xs:enumeration value="CORRECTION_CREDIT"></xs:enumeration>
+			<xs:enumeration value="CORRECTION_DEBIT"></xs:enumeration>
+			<xs:enumeration value="CREDIT_LOYAL"></xs:enumeration>
+			<xs:enumeration value="CREDIT_TOP_UP"></xs:enumeration>
+			<xs:enumeration value="DEBIT_TOP_UP"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountType">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountTypeName">
+		<xs:restriction base="Max50Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Street" type="Street">
+				<xs:annotation>
+					<xs:documentation>Ulice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="City" type="City">
+				<xs:annotation>
+					<xs:documentation>Město</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="PostalCode" type="PostalCode">
+				<xs:annotation>
+					<xs:documentation>Psč</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AddressCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressFull">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Code" type="AddressCode">
+				<xs:annotation>
+					<xs:documentation>Kód adresy - zatím povinné pro import adres společností ze Siebel (jednoznačný identifikátor). V případě adresy uživatele, pokud je při importu nevyplněný, jedná se o novou adresu, jinak o změnu stávající.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Name" type="AddressName">
+				<xs:annotation>
+					<xs:documentation>Název adresy (zatím povinné pouze pro uživatele)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="AddressType">
+				<xs:annotation>
+					<xs:documentation>Typ adresy, uživatelé mají pouze doručovací adresy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="AddressStatus">
+				<xs:annotation>
+					<xs:documentation>Stav adresy: platná, neplatná.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Primary" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Pro doručovací adresu příznak, že je primární</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Line1" type="AddressLine">
+				<xs:annotation>
+					<xs:documentation>1. řádek adresy uživatele. Povinné pro uživatele. U společnosti nemá být.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Line2" type="AddressLine">
+				<xs:annotation>
+					<xs:documentation>2. řádek adresy uživatele. Nepovinné pro uživatele. U společnosti nemá být.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Street" type="Street">
+				<xs:annotation>
+					<xs:documentation>Ulice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="StreetNumber" type="StreetNumber">
+				<xs:annotation>
+					<xs:documentation>Číslo domu popisné</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="StreetNumber2" type="StreetNumber">
+				<xs:annotation>
+					<xs:documentation>Číslo domu orientační</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="City" type="City">
+				<xs:annotation>
+					<xs:documentation>Město</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="PostalCode" type="PostalCode">
+				<xs:annotation>
+					<xs:documentation>Psč</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Country" type="CountryCode">
+				<xs:annotation>
+					<xs:documentation>Země</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AddressLine">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressList">
+		<xs:annotation>
+			<xs:documentation>Seznam adres uživatele</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Address" nillable="true" type="AddressFull"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AddressName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressStatus">
+		<xs:annotation>
+			<xs:documentation>A - valid, N - invalid</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"></xs:enumeration>
+			<xs:enumeration value="N"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressType">
+		<xs:annotation>
+			<xs:documentation>Address type enumeration</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HOME_DELIVERY">
+				<xs:annotation>
+					<xs:documentation>Home delivery address</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OFFICE_DELIVERY">
+				<xs:annotation>
+					<xs:documentation>Office delivery address</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdUserCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9.!#@$%&amp;'*+/=?^_`{|}~-]{1,20}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AMLimit">
+		<xs:sequence>
+			<xs:element name="LimitType" type="AccountLimitType">
+				<xs:annotation>
+					<xs:documentation>Typ limitu účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" type="AccountLimitValue">
+				<xs:annotation>
+					<xs:documentation>Hodnota limitu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Amount">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="16"></xs:totalDigits>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ApplicationCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ApprovalCode">
+		<xs:restriction base="Max8AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Asset">
+		<xs:sequence>
+			<xs:element name="Type" type="AssetType">
+				<xs:annotation>
+					<xs:documentation>Typ aktiva (např. GPC, FPC, předplatné ActivePass, sdílené prostředky)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Název aktiva (např. Stravování, Volný čas, Active Pass, Sdílené prostředky)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Hodnota aktiva (zůstatek na účtu, Volný vstup, celková hodnota eVoucherů)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AdditionalText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Doplňkový text. Např. zůstatek denního limitu pro GPC, "využití prostředků" pro FPC, "na dnes" pro ActivePass, N"xeVoucher" pro sdílené prostředky"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Url" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Odkaz do UFO na stránku daného aktiva (účet, seznam eVoucherů)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Enabled" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Příznak, zda má být tlačítko tlačítko možné aktivovat (zatím se používá pouze pro možnost projevení zájmu o ActivePass </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Detail">
+				<xs:annotation>
+					<xs:documentation>Zatím pouze pro FPC rozdělení kreditu po typech emisí.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Název aktiva (např. název typu emise, ....)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Value" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Hodnota akiva (např. zůstatek daného typu emise)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AssetType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GPC"></xs:enumeration>
+			<xs:enumeration value="FPC"></xs:enumeration>
+			<xs:enumeration value="CAF"></xs:enumeration>
+			<xs:enumeration value="ACTIVE_PASS"></xs:enumeration>
+			<xs:enumeration value="ACTIVE_PASS_INTEREST"></xs:enumeration>
+			<xs:enumeration value="SHARED_RESOURCES"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AtomicRole">
+		<xs:sequence>
+			<xs:element name="Code" type="AtomicRoleCode">
+				<xs:annotation>
+					<xs:documentation>Kód role</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AtomicRoleCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AtomicRoleList">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="AtomicRole" type="AtomicRole">
+				<xs:annotation>
+					<xs:documentation>Seznam atomických rolí</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Balance">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="16"></xs:totalDigits>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BasicList">
+		<xs:sequence>
+			<xs:element name="RecordsCount" type="xs:long"></xs:element>
+			<xs:element name="Page" type="xs:long"></xs:element>
+			<xs:element name="RecordsPerPage" type="xs:long"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="BenefitId">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="50"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{1,50}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BenefitsPrice">
+		<xs:sequence>
+			<xs:element name="BenefitId" type="BenefitId">
+				<xs:annotation>
+					<xs:documentation>Kód benefitu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Price" type="Amount">
+				<xs:annotation>
+					<xs:documentation>Cena benefitu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BenefitsPriceList">
+		<xs:annotation>
+			<xs:documentation>Seznam benefitů z nakupovaných internetového obchodu</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="BenefitsPrice" type="BenefitsPrice"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CampaignCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Card">
+		<xs:sequence>
+			<xs:element name="CardId" type="CardId">
+				<xs:annotation>
+					<xs:documentation>Id karty v CS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PAN" type="PAN">
+				<xs:annotation>
+					<xs:documentation>PAN karty.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardType" type="CardType">
+				<xs:annotation>
+					<xs:documentation>Kód typu karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressType" type="AddressType">
+				<xs:annotation>
+					<xs:documentation>Typ doručení karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="CardStatus">
+				<xs:annotation>
+					<xs:documentation>Stav karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastStatusUpdate" type="ISODateTime">
+				<xs:annotation>
+					<xs:documentation>Datum a čas poslední změny stavu karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidFrom" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum začátku platnosti karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidThru" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum konce platnosti karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CarrierType" type="Max255Text">
+				<xs:annotation>
+					<xs:documentation>Identifikace dopravce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="NewCardRequestDateTime" type="ISODateTime">
+				<xs:annotation>
+					<xs:documentation>Datum a čas žádosti o náhradní kartu, pokud existuje k dané kartě nějaká v neterminálním stavu.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CardId">
+		<xs:annotation>
+			<xs:documentation>Identifier of card from Wincor-Nixdorf storage system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CardInfo">
+		<xs:sequence>
+			<xs:element name="CardId" type="CardId">
+				<xs:annotation>
+					<xs:documentation>Id karty v CS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccountId" type="AccountId">
+				<xs:annotation>
+					<xs:documentation>Interní identifikátor účtu, ke kterému karta patří</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EmployeeCode" type="EmployeeCode">
+				<xs:annotation>
+					<xs:documentation>Kód zaměstnance, kterému  účet patří.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyCode" type="CompanyCode">
+				<xs:annotation>
+					<xs:documentation>Kód společnosti zaměstnance, kterému patří.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="TokenCardId" type="TokenCardId">
+				<xs:annotation>
+					<xs:documentation>Id karty v CS pro tvorbu platebních tokenů</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PAN" type="PAN">
+				<xs:annotation>
+					<xs:documentation>PAN karty.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="RFID" type="RFID">
+				<xs:annotation>
+					<xs:documentation>RFID karty.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardType" type="CardType">
+				<xs:annotation>
+					<xs:documentation>Kód typu karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardKind" type="CardKind">
+				<xs:annotation>
+					<xs:documentation>Druh karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressType" type="AddressType">
+				<xs:annotation>
+					<xs:documentation>Typ doručení karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="CardStatus">
+				<xs:annotation>
+					<xs:documentation>Stav karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastStatusUpdate" type="ISODateTime">
+				<xs:annotation>
+					<xs:documentation>Datum a čas poslední změny stavu karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SodexoBlock" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Příznak, že karta je blokovaná Sodexem (tj. v DB buď SPO nebo CM nebo AM)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidFrom" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum začátku platnosti karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidThru" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum konce platnosti karty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CarrierType" type="Max255Text">
+				<xs:annotation>
+					<xs:documentation>Identifikace dopravce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NewCardRequest" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Příznak, že ke kartě je v CM nebo AM evidovaná rozpracovaná žádost o vydání nové karty pro daného držitele</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SPLExported" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>V případě, že karta byla úspěšně exportovaná do SPL (podle  položky spl_export_status) vrací se hodnota true, jinak false.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CardKind">
+		<xs:annotation>
+			<xs:documentation>Type of card</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CardStatus">
+		<xs:annotation>
+			<xs:documentation>Card status enum</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CRD_ACT">
+				<xs:annotation>
+					<xs:documentation>card is active</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRD_EXP">
+				<xs:annotation>
+					<xs:documentation>card is expired</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRD_CANC">
+				<xs:annotation>
+					<xs:documentation>card cancelled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRD_IN_PRD">
+				<xs:annotation>
+					<xs:documentation>card is in production</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRD_NOT_ACT">
+				<xs:annotation>
+					<xs:documentation>card is not actived</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRD_NOT_MNF">
+				<xs:annotation>
+					<xs:documentation>card is not manufactured</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRD_MNF">
+				<xs:annotation>
+					<xs:documentation>card is manufactured</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRD_BLK_TMP">
+				<xs:annotation>
+					<xs:documentation>card temporarily blocked</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CardType">
+		<xs:annotation>
+			<xs:documentation>Type of card</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CiamId">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="City">
+		<xs:restriction base="Max255Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ClickNumber">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CommonAsyncResp">
+		<xs:annotation>
+			<xs:documentation>Obecná odpověď na jednotlivý požadavek v rámci asynchronního zpracování dávky požadavků.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SeqId" type="ExtId">
+				<xs:annotation>
+					<xs:documentation>Jednoznačný identifikátor jednotlivého požadavku v rámci volání</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResultCode" type="ResultCode">
+				<xs:annotation>
+					<xs:documentation>Návratový kód</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ResultText" type="xs:string"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CommonAsyncResult">
+		<xs:annotation>
+			<xs:documentation>Obecná odpověď na požadavek asynchronního zpracování dávky požadavků.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="CommonAsyncResp" type="CommonAsyncResp">
+				<xs:annotation>
+					<xs:documentation>Jednoznačný identifikátor jednotlivého požadavku v rámci volání</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CommonRequest">
+		<xs:sequence>
+			<xs:element name="RequestId" type="ExternalIdentificator"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CommonResponse">
+		<xs:sequence>
+			<xs:element name="Envelope" type="ResponseEnvelope"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Company">
+		<xs:sequence>
+			<xs:element name="Code" type="CompanyCode">
+				<xs:annotation>
+					<xs:documentation>Kód společnosti</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="CompanyName">
+				<xs:annotation>
+					<xs:documentation>Název společnosti</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="NoLimitCode" type="TSLimitCode">
+				<xs:annotation>
+					<xs:documentation>Kódy limitů Transakčního systému, které se pro danou společnost nemají aplikovat</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CompanyCode">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CompanyGroupCode">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CompanyGroupName">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CompanyName">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CompanyRelationshipType">
+		<xs:annotation></xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EMPLOYEE"></xs:enumeration>
+			<xs:enumeration value="FAMILY_MEMBER"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConfirmationCode">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5"></xs:minLength>
+			<xs:maxLength value="5"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{5,5}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContractCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CorellationId">
+		<xs:annotation>
+			<xs:documentation>Unikátní ID procesu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CountryCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Credit">
+		<xs:sequence>
+			<xs:element name="Credit" type="Amount">
+				<xs:annotation>
+					<xs:documentation>Částka</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CreditOrderId">
+		<xs:annotation>
+			<xs:documentation>Identifikátor objednávky
+					</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CreditOrderReason">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREDIT_ORDER"></xs:enumeration>
+			<xs:enumeration value="MANUAL_CREDIT"></xs:enumeration>
+			<xs:enumeration value="CLOSE_ACCOUNT"></xs:enumeration>
+			<xs:enumeration value="MANUAL_DEBIT"></xs:enumeration>
+			<xs:enumeration value="CREDIT_EXPIRE"></xs:enumeration>
+			<xs:enumeration value="CORRECTION_CREDIT"></xs:enumeration>
+			<xs:enumeration value="CORRECTION_DEBIT"></xs:enumeration>
+			<xs:enumeration value="CREDIT_LOYAL"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CurrencyCode">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">CurrencyCodeType</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Currency code by ISO 4217 </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"></xs:minLength>
+			<xs:maxLength value="3"></xs:maxLength>
+			<xs:pattern value="[A-Z]{3}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DataProcessingApproval">
+		<xs:restriction base="xs:boolean"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DeliveryAddress">
+		<xs:sequence>
+			<xs:element name="Line1" type="AddressLine">
+				<xs:annotation>
+					<xs:documentation>1. řádek adresy </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Line2" type="AddressLine">
+				<xs:annotation>
+					<xs:documentation>2. řádek adresy uživatele. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Street" type="Street">
+				<xs:annotation>
+					<xs:documentation>Ulice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="StreetNumber" type="StreetNumber">
+				<xs:annotation>
+					<xs:documentation>Číslo domu popisné</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="StreetNumber2" type="StreetNumber">
+				<xs:annotation>
+					<xs:documentation>Číslo domu orientační</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="City" type="City">
+				<xs:annotation>
+					<xs:documentation>Město</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="PostalCode" type="PostalCode">
+				<xs:annotation>
+					<xs:documentation>Psč</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Country" type="CountryCode">
+				<xs:annotation>
+					<xs:documentation>Země</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DistributionPointCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Email">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="250"></xs:maxLength>
+			<xs:pattern value="[A-Za-z0-9_]+([-+.'][A-Za-z0-9_]+)*@[A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*\.[A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmailBody">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16000"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmailSubject">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="250"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Employee">
+		<xs:sequence>
+			<xs:element name="EmployeeCode" type="EmployeeCode">
+				<xs:annotation>
+					<xs:documentation>Kód zaměstnance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyCode" type="CompanyCode">
+				<xs:annotation>
+					<xs:documentation>Kód společnosti zaměstnance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SecurityCode" type="SecurityCode">
+				<xs:annotation>
+					<xs:documentation>Bezpečnostní kód</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Mobile" type="Phone">
+				<xs:annotation>
+					<xs:documentation>Číslo mobilního telefonu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" name="Account" type="Account">
+				<xs:annotation>
+					<xs:documentation>Informace o účtech zaměstnance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EmployeeCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmployeeGroupCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmployeeNumber">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="EmployeeSecurityInfo">
+		<xs:annotation>
+			<xs:documentation>Informace pro zabezpečení účtu zaměstnance.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Mobile" type="Phone">
+				<xs:annotation>
+					<xs:documentation>Mobilní telefonní číslo, načítá se přednostně z AM.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SecurityCode" type="SecurityCode">
+				<xs:annotation>
+					<xs:documentation>Bezpečnostní kód uživatele</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SecurityCodeNewTime" type="ISODateTime">
+				<xs:annotation>
+					<xs:documentation>Vyplňuje se v případě, že zaměstnanec má účet pouze v CM a bylo v CM požádáno o vygenerování nového bezpečnostního kódu, a požadavek ještě nebyl vyřízen, obsahuje datum a čas žádosti. Pokud má účet v AM, pak je bezpečnostní kód vždy aktuální.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EmployeeStatus">
+		<xs:annotation>
+			<xs:documentation>A - active, N - inactive</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"></xs:enumeration>
+			<xs:enumeration value="N"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EntryType">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EntryTypeCode">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EntryTypeName">
+		<xs:restriction base="Max50Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="EntryTypeNames">
+		<xs:sequence>
+			<xs:element name="Language" type="LanguageCode">
+				<xs:annotation>
+					<xs:documentation>Kód jazyka (např. cs, en, ...)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="EntryTypeName">
+				<xs:annotation>
+					<xs:documentation>Název typu vstupu v daném jazyce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorResponse">
+		<xs:sequence>
+			<xs:element name="ExtId" type="ExtId">
+				<xs:annotation>
+					<xs:documentation>Externí id požadavku</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResultCode" type="Max20AlphaNumericText">
+				<xs:annotation>
+					<xs:documentation>Kód odpovědi na požadavek</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ResultText" type="xs:string"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EshopCode">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EshopOrderId">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="100"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9-]{1,100}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eVoucherId">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eVoucherNumber">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,12}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eVoucherStatus">
+		<xs:annotation>
+			<xs:documentation>Account status enum</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEW">
+				<xs:annotation>
+					<xs:documentation>Nový - aktivní</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USED">
+				<xs:annotation>
+					<xs:documentation>vyčerpaný</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EXPIRED">
+				<xs:annotation>
+					<xs:documentation>expirovaný</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CANCELED_EMPLOYEE">
+				<xs:annotation>
+					<xs:documentation>zrušený zaměstnancem</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CANCELED_AM">
+				<xs:annotation>
+					<xs:documentation>zrušený systémem</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExternalId">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ExternalIdentificator">
+		<xs:sequence>
+			<xs:element name="IdInApplication" type="ExternalId">
+				<xs:annotation>
+					<xs:documentation>Id požadavku v rámci aplikace</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Application" type="ApplicationCode">
+				<xs:annotation>
+					<xs:documentation>Kód aplikace</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="CorellationId" type="CorellationId">
+				<xs:annotation>
+					<xs:documentation>Unikátní ID procesu - vytváří strana, která zahajuje proces, resp. vytváří první volání v rámci procesu. Nikdy se nemění, musí být předáváno cross všechna volání</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExternalToken">
+		<xs:sequence>
+			<xs:element name="Token" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Externí token</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ExtId">
+		<xs:annotation>
+			<xs:documentation>Identifikátor požadavku
+						Formát: SDXNNYYMMMMMMM, kde
+						SDX – konstanta
+						NN – číslo interfacu (napr. 04 pro credit order)
+						YY – číslo volajícího subsystému SODEXO (např. 01 – CM, 02 – SPO, …)
+						MMMMMMM – sekvence
+					</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="Max36Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:element name="GetResultRequest" type="GetResultRequestType">
+		<xs:annotation>
+			<xs:documentation>Žádost o načtení připravených dat</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GetResultRequestType">
+		<xs:annotation>
+			<xs:documentation>Žádost o přečtení výsledku</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="CommonRequest">
+				<xs:sequence>
+					<xs:element name="ExtReqId" type="ExtId">
+						<xs:annotation>
+							<xs:documentation>Identifikátor žádosti o data</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetResultResponse" type="GetResultResponseType">
+		<xs:annotation>
+			<xs:documentation>Odpověď obsahuje buď vytvořená data v attachmentu a nebo případně odpoveď, že data zatím ještě nebyla vytvořena nebo chybový kód.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GetResultResponseType">
+		<xs:annotation></xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="CommonResponse">
+				<xs:sequence minOccurs="0">
+					<xs:element name="ResponseHolder" type="xs:base64Binary" xmime:expectedContentTypes="application/xml">
+						<xs:annotation>
+							<xs:documentation>Data jsou obsažena v attachmentu v elementu odpovídajícímu žádosti (např. cmn:Employee pro informace o účtech z AM, CardReport pro informace o kartách, cmn:NotificationData pro data notifikací), který se může libovolně opakovat.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="Image">
+		<xs:restriction base="xs:base64Binary"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ImageId">
+		<xs:restriction base="Max255Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Impressions">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InterestCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="InterestList">
+		<xs:annotation>
+			<xs:documentation>Seznam zájmů uživatele</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Interest" nillable="true" type="InterestCode"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="InterfaceCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREDIT_ORDER"></xs:enumeration>
+			<xs:enumeration value="CLOSE_ACCOUNT"></xs:enumeration>
+			<xs:enumeration value="CARD_STATUS_UPDATE"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IP">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="((1?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ISODate">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">ISODate</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">A particular point in the progression of time in a calendar year expressed
+                in the YYYY-MM-DD format. This representation is defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004"
+                which is aligned with ISO 8601.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ISODateTime">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">ISODateTime</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">A particular point in the progression of time defined by a mandatory date and a mandatory time component, expressed in either UTC time format (YYYY-MM-DDThh:mm:ss.sssZ), local time with UTC offset format (YYYY-MM-DDThh:mm:ss.sss+/-hh:mm), or local time format (YYYY-MM-DDThh:mm:ss.sss). These representations are defined in "XML Schema Part 2: Datatypes Second Edition - W3C Recommendation 28 October 2004" which is aligned with ISO 8601.
+                Note on the time format:
+                1) beginning / end of calendar day
+                00:00:00 = the beginning of a calendar day
+                24:00:00 = the end of a calendar day
+                2) fractions of second in time format
+                Decimal fractions of seconds may be included. In this case, the involved parties shall agree on the maximum number of digits that are allowed.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Issue">
+		<xs:sequence>
+			<xs:element name="Code" type="IssueCode">
+				<xs:annotation>
+					<xs:documentation>Kód emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="IssueName">
+				<xs:annotation>
+					<xs:documentation>Název emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IssueTypeCode" type="IssueTypeCode">
+				<xs:annotation>
+					<xs:documentation>Kód typu emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="CompanyCode" type="CompanyCode">
+				<xs:annotation>
+					<xs:documentation>Kód společnosti, pro kterou je emise vytvořena, pokud není vyplněn, jedná se o všeobecně použitelnou emisi.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IssueFrom" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum prvního dne pro úpis emise. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IssueUntil" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum posledního dne pro úpis emise. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExpirationDate" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum expirace emise. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="IssueCode">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IssueName">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IssueTypeCode">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="JiraTicketId">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="JWTToken">
+		<xs:restriction base="xs:string"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LanguageCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"></xs:maxLength>
+			<xs:minLength value="2"></xs:minLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Locality">
+		<xs:annotation>
+			<xs:documentation>Signed degrees format (DDD.dddd)
+Precede South latitudes and West longitudes with a minus sign.
+Latitudes range from -90 to 90.
+Longitudes range from -180 to 180.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Latitude" type="xs:decimal"></xs:element>
+			<xs:element name="Longitude" type="xs:decimal"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="MaskedPAN">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="36"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max100AlphaNumericText">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max100AlphaNumericText</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies an alphanumeric string with a maximum length of 100 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="100"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{1,100}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max100Text">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max100Text</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies a string with a maximum length of 100 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="100"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max10Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="10"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max16AlphaNumericText">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max16AlphaNumericText</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies an alphanumeric string with a maximum length of 16 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="16"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{1,16}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max2000Text">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max2000Text</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies a string with a maximum length of 2000 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="2000"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max20AlphaNumericText">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max20AlphaNumericText</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies an alphanumeric string with a maximum length of 20 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="20"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{1,20}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max250Text">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max250Text</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies a string with a maximum length of 250 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="250"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max255Text">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max255Text</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies a string with a maximum length of 255 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="255"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max36Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="36"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max4000Text">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max4000Text</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies a string with a maximum length of 2000 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="4000"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max400Text">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max400Text</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies a string with a maximum length of 2000 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="400"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max40Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="40"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max50AlphaNumericText">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max50AlphaNumericText</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies an alphanumeric string with a maximum length of 50 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="50"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{1,50}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max50Text">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max50Text</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies a string with a maximum length of 50 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="100"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max6Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="6"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max8AlphaNumericText">
+		<xs:annotation>
+			<xs:documentation source="Name" xml:lang="EN">Max16AlphaNumericText</xs:documentation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies an alphanumeric string with a maximum length of 16 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="8"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{1,8}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max8Text">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="8"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Name">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NewCardRequestReason">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LOST"></xs:enumeration>
+			<xs:enumeration value="DAMAGED"></xs:enumeration>
+			<xs:enumeration value="NONFUNCTIONAL"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NewCardRequestStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="REJECTED"></xs:enumeration>
+			<xs:enumeration value="ACCEPTED"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NotificationId">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NotificationText">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16000"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NotificationTitle">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="250"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderBy">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Originator">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SPO"></xs:enumeration>
+			<xs:enumeration value="HOLDER"></xs:enumeration>
+			<xs:enumeration value="CM"></xs:enumeration>
+			<xs:enumeration value="AM"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PAN">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaperPart">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="100"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Password">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="255"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentInstrumentIdentification">
+		<xs:annotation>
+			<xs:documentation>Externí identifikátor účtu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="50"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentInstrumentType">
+		<xs:annotation>
+			<xs:documentation>Čím je identifikován platební prostředek</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACCOUNT_ID">
+				<xs:annotation>
+					<xs:documentation>Id účtu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACCOUNT_NUMBER">
+				<xs:annotation>
+					<xs:documentation>Zobrazovaným číslem účtu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CARD_ID">
+				<xs:annotation>
+					<xs:documentation>Id karty</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CARD_PAN">
+				<xs:annotation>
+					<xs:documentation>Číslem karty (PAN)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentSource">
+		<xs:annotation>
+			<xs:documentation>Zdroj požadavku na platbu</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MERCHANT_PAYMENT">
+				<xs:annotation>
+					<xs:documentation>Platba přes eSodexo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GATEWAY_PAYMENT">
+				<xs:annotation>
+					<xs:documentation>Platba přes platební bránu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POS_PAYMENT">
+				<xs:annotation>
+					<xs:documentation>Platba přes platební terminál</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentToken">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="256"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentType">
+		<xs:annotation>
+			<xs:documentation>Type platby</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PURCHASE">
+				<xs:annotation>
+					<xs:documentation>Standardní platba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REVERSAL">
+				<xs:annotation>
+					<xs:documentation>Storno platby</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PeriodType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TODAY">
+				<xs:annotation>
+					<xs:documentation>Dnes od 00:00</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WEEK">
+				<xs:annotation>
+					<xs:documentation>Dnes + 6 dnů dozadu od 00:00</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MONTH">
+				<xs:annotation>
+					<xs:documentation>Dnes + 30 dnů dozadu od 00:00</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUSTOM">
+				<xs:annotation>
+					<xs:documentation>Podle výběru uživatele</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Permission">
+		<xs:sequence>
+			<xs:element name="Role" type="RoleCode"></xs:element>
+			<xs:element name="Application" type="ApplicationCode"></xs:element>
+			<xs:element name="Company" type="CompanyCode"></xs:element>
+			<xs:element minOccurs="0" name="ValidFrom" type="xs:date"></xs:element>
+			<xs:element minOccurs="0" name="ValidUntil" type="xs:date"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Phone">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="9"></xs:minLength>
+			<xs:maxLength value="20"></xs:maxLength>
+			<xs:pattern value="(([(]?(\d{2,4})[)]?)|(\d{2,4})|([+1-9]+\d{1,2}))?[-\s]?(\d{2,3})?[-\s]?((\d{7,8})|(\d{3,4}[-\s]\d{3,4}))"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Photo">
+		<xs:restriction base="xs:base64Binary"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="POSId">
+		<xs:restriction base="Max16AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Position">
+		<xs:annotation>
+			<xs:documentation>Signed degrees format (DDD.dddd)
+Precede South latitudes and West longitudes with a minus sign.
+Latitudes range from -90 to 90.
+Longitudes range from -180 to 180.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="PositionName"></xs:element>
+			<xs:element name="Latitude" type="xs:decimal"></xs:element>
+			<xs:element name="Longitude" type="xs:decimal"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PositionName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostalCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Priority">
+		<xs:restriction base="xs:int"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductCode">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProfileId">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="100"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProfileName">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="100"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Rating">
+		<xs:restriction base="xs:float"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RatingCount">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RecordsPerPage">
+		<xs:restriction base="xs:int"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ResponseEnvelope">
+		<xs:sequence>
+			<xs:element name="RequestId" type="ExternalIdentificator">
+				<xs:annotation>
+					<xs:documentation>Identifikátor požadavku</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResponseId" type="ExternalIdentificator">
+				<xs:annotation>
+					<xs:documentation>Identifikátor odpovědi.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResultCode" type="Max20AlphaNumericText">
+				<xs:annotation>
+					<xs:documentation>Kód odpovědi na požadavek</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ResultText" type="xs:string"></xs:element>
+			<xs:element name="Timestamp" type="ISODateTime"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="RestrictedDecimal16_2">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="16"></xs:totalDigits>
+			<xs:fractionDigits value="2"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultCode">
+		<xs:annotation>
+			<xs:documentation source="Definition" xml:lang="EN">Specifies an alphanumeric string with a maximum length of 20 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="20"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{1,20}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResultText">
+		<xs:restriction base="xs:string"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RFID">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RoleCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Salt">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="255"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SecurityCode">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="8"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9]{1,8}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Sequence">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Sex">
+		<xs:annotation>
+			<xs:documentation>0 - not known, 1 - male, 2 - female</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0"></xs:enumeration>
+			<xs:enumeration value="1"></xs:enumeration>
+			<xs:enumeration value="2"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ShortName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="27"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SMSText">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="400"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SortOrder">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ASC"></xs:enumeration>
+			<xs:enumeration value="DESC"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialOfferAdvantage">
+		<xs:restriction base="Max255Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialOfferId">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialOfferLocality">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialOfferName">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialOfferNote">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2048"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialOfferProvider">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialOfferStatusCode">
+		<xs:annotation>
+			<xs:documentation>Account status enum</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IN_DEVELOPMENT">
+				<xs:annotation>
+					<xs:documentation>Rozpracovaná</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FOR_APPROVAL">
+				<xs:annotation>
+					<xs:documentation>Ke schválení</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APPROVED">
+				<xs:annotation>
+					<xs:documentation>Schválená</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUSPENDED">
+				<xs:annotation>
+					<xs:documentation>Pozastavená</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FINISHED">
+				<xs:annotation>
+					<xs:documentation>Ukončená</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REJECTED">
+				<xs:annotation>
+					<xs:documentation>Zamítnutá</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CANCELED">
+				<xs:annotation>
+					<xs:documentation>Zrušená</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialOfferText">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4096"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Street">
+		<xs:restriction base="Max255Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetNumber">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="15"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Subscription">
+		<xs:annotation>
+			<xs:documentation>Údaje k předplanému pro Active Pass</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IssueTypeName" type="IssueName">
+				<xs:annotation>
+					<xs:documentation>Název typu navázané emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidFrom" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Počáteční datum platnosti emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExpirationDate" type="ISODate">
+				<xs:annotation>
+					<xs:documentation>Datum expirace emise</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="SubscriptionName">
+		<xs:restriction base="Max50Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriptionTypeCode">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ThematicPackageDescription">
+		<xs:restriction base="Max255Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ThematicPackageName">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Title">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TokenCardId">
+		<xs:annotation>
+			<xs:documentation>Identifier of card from Wincor-Nixdorf storage system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TokenLimit">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="6"></xs:totalDigits>
+			<xs:fractionDigits value="0"></xs:fractionDigits>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TokenReferenceId">
+		<xs:annotation>
+			<xs:documentation>Id tokenu.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TopUpCardStatus">
+		<xs:annotation>
+			<xs:documentation>TopUp card status enum</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREDIT_ORDER">
+				<xs:annotation>
+					<xs:documentation>objednávka 1 Kč odeslána</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CREDIT_ORDER_CANCEL">
+				<xs:annotation>
+					<xs:documentation>odesláno storno objednávky 1 Kč kreditu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACTIVE">
+				<xs:annotation>
+					<xs:documentation>karta je aktivní</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CANCELLED">
+				<xs:annotation>
+					<xs:documentation>registrace karty je zrušená</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Transaction">
+		<xs:sequence>
+			<xs:element name="Amount" type="RestrictedDecimal16_2">
+				<xs:annotation>
+					<xs:documentation>Hodnota transakce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrencyCode" type="CurrencyCode">
+				<xs:annotation>
+					<xs:documentation>Kód měny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Datetime" type="ISODateTime">
+				<xs:annotation>
+					<xs:documentation>Datum a čas transakce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="AccountTransactionType">
+				<xs:annotation>
+					<xs:documentation>Typ transakce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="EntryType" type="EntryType">
+				<xs:annotation>
+					<xs:documentation>Typ vstupu pro účty typu Active Pass</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="WorkshopName" type="WorkshopName">
+				<xs:annotation>
+					<xs:documentation>Pro platební transakce název obchodního místa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ApprovalCode" type="ApprovalCode">
+				<xs:annotation>
+					<xs:documentation>Autorizační kód, DB: v CM přímo v transakci, v AM je jen pro platby v navázané entity PaymentRequest</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TSLimitCode">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Username">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="50"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserStatus">
+		<xs:annotation>
+			<xs:documentation>A - active, N - inactive</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"></xs:enumeration>
+			<xs:enumeration value="N"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="VersionRequest" type="VersionRequestType">
+		<xs:annotation>
+			<xs:documentation>Dotaz na verze</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="VersionRequestType">
+		<xs:annotation>
+			<xs:documentation>Dotaz na verze</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="CommonRequest">
+				<xs:sequence></xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="VersionResponse" type="VersionResponseType"></xs:element>
+	<xs:complexType name="VersionResponseType">
+		<xs:annotation>
+			<xs:documentation>Odpověď na žádost o verzi</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="CommonResponse">
+				<xs:sequence>
+					<xs:element default="0.04" name="APIVersion" type="xs:string"></xs:element>
+					<xs:element name="DBVersion" type="xs:string"></xs:element>
+					<xs:element name="AppVersion" type="xs:string"></xs:element>
+					<xs:element name="AppRevision" type="xs:string"></xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="VoucherPreference">
+		<xs:sequence>
+			<xs:element name="PaperPart" type="PaperPart">
+				<xs:annotation>
+					<xs:documentation>Preferovaný podíl v papírových stravenkách</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Address">
+				<xs:annotation>
+					<xs:documentation>Preferovaná adresa</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AddressName" type="Max40Text">
+							<xs:annotation>
+								<xs:documentation>Preferovaná adresa - jméno</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AddressSurname" type="Max40Text">
+							<xs:annotation>
+								<xs:documentation>Preferovaná adresa - příjmení</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element minOccurs="0" name="AddressStreet" type="Max255Text">
+							<xs:annotation>
+								<xs:documentation>Preferovaná adresa - ulice</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element minOccurs="0" name="AddressNumber" type="Max20AlphaNumericText">
+							<xs:annotation>
+								<xs:documentation>Preferovaná adresa - číslo domu</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AddressCity" type="Max255Text">
+							<xs:annotation>
+								<xs:documentation>Preferovaná adresa - město</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AddressPostalCode" type="Max6Text">
+							<xs:annotation>
+								<xs:documentation>Preferovaná adresa - psč</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Workshop">
+		<xs:sequence>
+			<xs:element name="Code" type="WorkshopCode">
+				<xs:annotation>
+					<xs:documentation>Kód provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="WorkshopName">
+				<xs:annotation>
+					<xs:documentation>Název provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Street" type="Street">
+				<xs:annotation>
+					<xs:documentation>Ulice provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="City" type="City">
+				<xs:annotation>
+					<xs:documentation>Město provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Locality" type="Locality">
+				<xs:annotation>
+					<xs:documentation>GPS souřadnice provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyCode" type="CompanyCode">
+				<xs:annotation>
+					<xs:documentation>Kód společnosti, které patří provozovna </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eVoucher" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Příznak, zda lze pro danou provozovnu vytvářet eVoucher.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WorkshopAttributeCode" type="WorkshopAttributeCode">
+				<xs:annotation>
+					<xs:documentation>Atributy provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorkshopAttribute">
+		<xs:sequence>
+			<xs:element name="Code" type="WorkshopAttributeCode">
+				<xs:annotation>
+					<xs:documentation>Kód atributu provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="Max50Text">
+				<xs:annotation>
+					<xs:documentation>Název atributu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="WorkshopLimit" type="WorkshopLimit">
+				<xs:annotation>
+					<xs:documentation>Seznam limitů, ze kterých čerpá platba v provozovně s daným atributem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="ChildAttributeCode" type="WorkshopAttributeCode">
+				<xs:annotation>
+					<xs:documentation>Seznam kódů podřízených atributů</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="WorkshopAttributeCode">
+		<xs:restriction base="Max20AlphaNumericText"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WorkshopCode">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="20"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WorkshopDescription">
+		<xs:restriction base="Max255Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="WorkshopInfo">
+		<xs:sequence>
+			<xs:element name="Code" type="WorkshopCode">
+				<xs:annotation>
+					<xs:documentation>Kód provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="WorkshopName">
+				<xs:annotation>
+					<xs:documentation>Název provozovny</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyCode" type="CompanyCode">
+				<xs:annotation>
+					<xs:documentation>Kód společnosti, které patří provozovna </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="ProductCode" type="ProductCode">
+				<xs:annotation>
+					<xs:documentation>Kódy produktů, které provozovna akceptuje.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorkshopLimit">
+		<xs:sequence>
+			<xs:element name="LimitCode" type="TSLimitCode">
+				<xs:annotation>
+					<xs:documentation>Kód limitu transakčního systému</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccountType" type="AccountType">
+				<xs:annotation>
+					<xs:documentation>Typ účtu</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="WorkshopName">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WorkshopPackageId">
+		<xs:restriction base="xs:long"></xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WorkshopPackageTitle">
+		<xs:restriction base="Max100Text"></xs:restriction>
+	</xs:simpleType>
+	<!-- xs:simpleType name="ExtId">
+		<xs:annotation>
+			<xs:documentation>Jednoznačný identifikátor přípisu/odpisu/požadavku na zminu stavu (generovaný v SPO nebo CM)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType-->
+</xs:schema>

@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cz.toce.learn.ws</groupId>
+	<artifactId>simplest.soap.client</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>simplest soap client</name>
+	<description>simplest soap client</description>
+
+	<!-- https://stackoverflow.com/questions/54573998/java-11-package-javax-xml-soap-does-not-exist -->
+	<properties>
+		<!-- https://search.maven.org/search?q=g:com.sun.xml.ws -->
+		<com.sun.xml.ws.jaxws-rt.version>3.0.0</com.sun.xml.ws.jaxws-rt.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- 
+			@see https://stackoverflow.com/questions/5401358/whats-the-difference-between-jaxws-ri-and-jaxws-rt
+			-->		
+			<!-- JAXWS for Java 11 -->
+			<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-ri</artifactId>
+				<version>${com.sun.xml.ws.jaxws-rt.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-rt</artifactId>
+				<version>${com.sun.xml.ws.jaxws-rt.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>rt</artifactId>
+				<version>${com.sun.xml.ws.jaxws-rt.version}</version>
+			</dependency>
+			<!-- JAXWS for java 11 and jakarta
+			@see https://eclipse-ee4j.github.io/metro-jax-ws/ -->
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-ri</artifactId>
+			<type>pom</type>
+		</dependency>
+		<!-- JAXWS for Java 11 -->
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>rt</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

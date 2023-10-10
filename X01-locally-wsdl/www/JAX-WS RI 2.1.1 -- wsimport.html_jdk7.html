@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0073)https://docs.oracle.com/javase/7/docs/technotes/tools/share/wsimport.html -->
+<html lang="en-US" class=" regenabled browserSafari radius jsenabled regloaded"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+
+
+<title>JAX-WS RI 2.1.1 -- wsimport</title>
+  <meta name="collection" content="reference">
+  <meta name="copyright" content="2005, 2011">
+
+<script language="javascript1.2" type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/popUp.js.stažený soubor"></script>
+<script language="javascript1.2" type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/sniff.js.stažený soubor"></script>
+<script language="javascript1.2" type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/menucontent.js.stažený soubor"></script>
+<script language="javascript1.2" type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/menucode.js.stažený soubor"></script>
+<script language="javascript1.2" type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/developer.js.stažený soubor"></script>
+<script language="javascript1.2" type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/search.js.stažený soubor"></script>
+<link rel="stylesheet" href="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/default_developer.css">
+<meta name="collection" content="reference"> 
+<script>bazadebezolkohpepadr="757928566"</script><script type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/2d2d1081" defer=""></script></head>
+
+<body>
+<noscript>JavaScript is not supported by your browser. JavaScript
+support is required for full functionality of this page.</noscript>
+<div class="a0 a0v1" id="a0v1"><!-- BEGIN A1 COMPONENT V.0 -->
+<div class="a1 a1r2">
+<div class="a1v0"><a href="https://docs.oracle.com/javase/7/docs/technotes/tools/share/wsimport.html#skip2content" class="skiplink">Skip to
+Content</a></div>
+</div>
+<!-- END A1 COMPONENT V.0 -->
+<!-- BEGIN A2 COMPONENT V.1 -->
+<div class="a2w0">
+<div class="a2" id="a2v1">
+<div class="a2w1">
+<div class="a2w2">
+<div class="a2w3">
+<div class="a2w4">
+<div class="a2topiclinks"><a href="http://www.oracle.com/" title="Oracle Home Page" id="sunlogo" name="sunlogo"><img src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/a.gif" alt="Home Page" width="98" height="58" border="0"></a>
+<ul id="mtopics">
+<li id="mtopic1"><a id="glink1" class="tpclink a2menu" title="See Oracle Technology Network" href="http://oracle.com/technology" name="glink1">Oracle Technology Network</a></li>
+<li id="mtopic2"><a id="glink2" class="tpclink a2menu" title="Software Downloads" href="http://www.oracle.com/technology/software/index.html" name="glink2">Software Downloads</a></li>
+<li id="mtopic3"><a id="glink3" class="tpclink a2menu" title="See Java SE Documentation" href="http://download.oracle.com/javase/index.html" name="glink3">Documentation</a></li>
+</ul>
+<div class="a2search"><a href="https://docs.oracle.com/javase/search.html" target="_blank">Search</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- END A2 COMPONENT V.1 -->
+<!-- BEGIN SEPARATOR -->
+<div class="hr">
+<hr></div>
+<!-- END SEPARATOR -->
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+<a name="skip2content" id="skip2content"></a>
+
+
+
+<div class="smallpagetitle"><h1>wsimport - Java™ API for XML Web Services (JAX-WS) 2.0 </h1></div>
+
+<p align="center"><b>Specification Version:</b> 2.1 <br>
+<b>Implementation Version:</b> 2.1.1 <br>
+</p>
+
+<h2>Contents</h2>
+
+<ul>
+  <li><a href="https://docs.oracle.com/javase/7/docs/technotes/tools/share/wsimport.html#Overview">Overview</a></li>
+  <li><a href="https://docs.oracle.com/javase/7/docs/technotes/tools/share/wsimport.html#Launching_wsimport">Launching wsimport</a></li>
+  <li><a href="https://docs.oracle.com/javase/7/docs/technotes/tools/share/wsimport.html#Syntax">Syntax</a></li>
+  <li><a href="https://docs.oracle.com/javase/7/docs/technotes/tools/share/wsimport.html#Example">Example</a></li>
+</ul>
+<a name="Overview"></a>
+<h2> Overview </h2>
+
+<p>The <code>wsimport</code> tool generates JAX-WS portable artifacts, such as: </p>
+
+<ul>
+<li>Service Endpoint Interface (SEI)</li>
+<li>Service</li>
+<li>Exception class mapped from wsdl:fault (if any)</li>
+<li>Async Reponse Bean derived from response wsdl:message (if any)</li>
+<li>JAXB generated value types (mapped java classes from schema types)</li>
+</ul>
+
+<p>These artifacts can be packaged in a WAR file with the WSDL and schema documents 
+along with the endpoint implementation to be deployed. also provides wsimport ant task, 
+see <a href="https://jax-ws.dev.java.net/nonav/2.1.1/docs/wsimportant.html">Wsimport 
+ant task</a>. <br>
+</p>
+
+<a name="Launching_wsimport"></a>
+<h2> Launching wsimport </h2>
+
+<ul>
+<li> <b>Solaris/Linux</b>
+<ul>
+<li><code>/bin/wsimport.sh -help</code></li>
+</ul>
+</li>
+<li> <b>Windows</b>
+<ul>
+<li><code>\bin\wsimport.bat -help</code></li>
+</ul>
+</li>
+</ul>
+
+<a name="Syntax"></a>
+<h2> Syntax </h2>
+
+<pre>wsimport [options] &lt;wsdl&gt;</pre>
+
+<p>The following table lists the <code>wsimport</code> options. </p>
+
+<table summary="wsimport options" border="1">
+<tbody><tr>
+<th id="option"> <p align="center">Option </p></th>
+<th id="description"> <p align="center">Description </p></th>
+</tr>
+</tbody><tbody valign="top">
+<tr>
+<td headers="option"><pre><b>-d &lt;directory&gt; </b> </pre></td>
+<td headers="description"><p align="left">Specify where to place generated output files </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-b &lt;path&gt; </b> </pre></td>
+<td headers="description"><p>Specify external JAX-WS or JAXB binding files (Each 
+<code>&lt;file&gt;</code> must have its own <code>-b</code>) </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-B &lt;jaxbOption&gt;</b></pre></td>
+<td headers="description"><p>Pass this option to JAXB schema compiler</p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-catalog</b></pre></td>
+<td headers="description"><p align="left">Specify catalog file to resolve external entity references, 
+it supports TR9401, XCatalog, and OASIS XML Catalog format. Please read the documentation 
+of <a href="https://jax-ws.dev.java.net/nonav/2.1.1/docs/catalog-support.html">catalog</a> 
+and see <strong>catalog</strong> sample. </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-extension </b> </pre></td>
+<td headers="description"><p align="left">Allow vendor extensions (functionality not specified by the 
+specification). Use of extensions may result in applications that are not portable or 
+may not interoperate with other implementations </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-help </b> </pre></td>
+<td headers="description"><p>Display help </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-httpproxy:&lt;host&gt;:&lt;port&gt; </b> </pre></td>
+<td headers="description"><p align="left">Specify an HTTP proxy server (port defaults to 8080) </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-keep </b> </pre></td>
+<td headers="description"><p align="left">Keep generated files </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-p </b> </pre></td>
+<td headers="description">Specifying a target package via this command-line option, overrides any wsdl and 
+schema binding customization for package name and the default package name algorithm 
+defined in the specification</td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-s &lt;directory&gt; </b> </pre></td>
+<td headers="description"><p align="left">Specify where to place generated source files </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-verbose </b> </pre></td>
+<td headers="description"><p align="left">Output messages about what the compiler is doing </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-version </b> </pre></td>
+<td headers="description"><p align="left">Print version information </p></td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-wsdllocation &lt;location&gt;</b> </pre></td>
+<td headers="description"><code>@WebServiceClient.wsdlLocation</code> value</td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-target </b> </pre></td>
+<td headers="description">Generate code as per the given JAX-WS specification version. version 2.0 will 
+generate compliant code for JAX-WS 2.0 spec.</td>
+</tr>
+<tr>
+<td headers="option"><pre><b>-quiet </b> </pre></td>
+<td headers="description">Suppress wsimport output</td>
+</tr>
+</tbody>
+</table>
+
+<p>Multiple JAX-WS and JAXB binding files can be specified using <code>-b</code> 
+option and they can be used to customize various things like package names, bean 
+names, etc. More information on JAX-WS and JAXB binding files can be found in the 
+<a href="https://jax-ws.dev.java.net/nonav/2.1.1/docs/customizations.html">customization 
+documentation</a>. </p>
+
+<p>The following table lists <code>wsimport</code> non-standard options:</p>
+
+<table summary="wsimport non-standard options" border="1">
+  <tbody><tr>
+    <th id="optionx"> <p align="center">Option </p></th>
+    <th id="descriptionx"> <p align="center">Description </p></th>
+  </tr>
+</tbody><tbody valign="top">
+  <tr>
+    <td headers="optionx"><pre><b>-XadditionalHeaders</b></pre></td>
+    <td headers="descriptionx"><p align="left">Map headers not bound to request or response message to Java method parameters.</p></td>
+   </tr>
+  <tr>
+    <td headers="optionx"><pre><b>-Xauthfile &lt;file&gt;</b></pre></td>
+    <td headers="descriptionx">
+      <p align="left">WSDL URI that specifies the file that contains authorization information; this URI is in the following format:</p>
+      <pre>http://<em>&lt;user name&gt;</em>:<em>&lt;password&gt;</em>@<em>&lt;host name&gt;</em>/<em>&lt;Web service name&gt;</em>?wsdl</pre></td>
+   </tr>
+  <tr>
+    <td headers="optionx"><pre><b>-Xdebug</b></pre></td>
+    <td headers="descriptionx"><p align="left">Print debugging information.</p></td>
+   </tr>
+  <tr>
+    <td headers="optionx"><pre><b>-Xno-addressing-databinding</b></pre></td>
+    <td headers="descriptionx"><p align="left">Enable binding of W3C <code>EndpointReferenceType</code> to Java.</p></td>
+   </tr>
+  <tr>
+    <td headers="optionx"><pre><b>-Xnocompile</b></pre></td>
+    <td headers="descriptionx"><p align="left">Do not compile generated Java files.</p></td>
+   </tr>
+  
+  
+</tbody>
+</table>
+
+
+<a name="Example"></a>
+<h2> Example </h2>
+
+<pre><b>wsimport -p stockquote http://stockquote.example.com/quote?wsdl</b></pre>
+
+<p>This will generate the Java artifacts and compile them by importing the 
+<code>http://stockquote.example.com/quote?wsdl</code>. <br>
+</p>
+
+<div id="javasefooter">
+<div class="hr">
+<hr></div>
+<div id="javasecopyright">
+<a href="https://docs.oracle.com/javase/7/docs/legal/cpyr.html">Copyright ©</a> 1993, 2020, Oracle
+and/or its affiliates. All rights reserved.
+</div>
+
+<div id="javasecontactus">
+<a href="http://docs.oracle.com/javase/feedback.html">Contact Us</a>
+</div>
+</div>
+</div>
+
+<!-- Start SiteCatalyst code   -->
+<script language="JavaScript" type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/s_code_download.js.stažený soubor"></script>
+<script language="JavaScript" type="text/javascript" src="./JAX-WS RI 2.1.1 -- wsimport.html_jdk7_files/s_code.js.stažený soubor"></script>
+ 
+<!-- ********** DO NOT ALTER ANYTHING BELOW THIS LINE ! *********** -->
+<!--  Below code will send the info to Omniture server -->
+<script language="javascript" type="text/javascript">var s_code=s.t();if(s_code)document.write(s_code)</script>
+ 
+<!-- End SiteCatalyst code -->
+
+<noscript><img src="https://docs.oracle.com/akam/13/pixel_2d2d1081?a=dD1iYjNmZTA3NDFjMTQwMDk4MTEyZDdjODhkMTk4ZWE5OTQ1MGYyOThhJmpzPW9mZg==" style="visibility: hidden; position: absolute; left: -999px; top: -999px;" /></noscript>
+
+</body></html>

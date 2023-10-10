@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="cz.styrax.sdx.soap.client.WebServiceClientFactoryTest" time="2.197" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="user.variant" value=""/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="user.dir" value="S:\project\sdx\trunk\soap\soap.client"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.home" value="S:\opt\jdk\jdk1.7.0_79\jre"/>
+    <property name="user.name" value="tomas.cejka"/>
+    <property name="sun.boot.library.path" value="S:\opt\jdk\jdk1.7.0_79\jre\bin"/>
+    <property name="user.home" value="C:\Users\tomas.cejka.STYRAX"/>
+    <property name="localRepository" value="C:\Users\tomas.cejka.STYRAX\.m2\repository"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="user.language" value="cs"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.jnu.encoding" value="Cp1250"/>
+    <property name="java.io.tmpdir" value="C:\Users\tomas.cejka.STYRAX\AppData\Local\Temp\"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.class.path" value="S:\project\sdx\trunk\soap\soap.client\target\test-classes;S:\project\sdx\trunk\soap\soap.client\target\classes;C:\Users\tomas.cejka.STYRAX\.m2\repository\com\predic8\soa-model-core\1.6.0\soa-model-core-1.6.0.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\codehaus\groovy\groovy\2.4.7\groovy-2.4.7.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\codehaus\groovy\groovy-xml\2.4.7\groovy-xml-2.4.7.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\codehaus\groovy\groovy-json\2.4.7\groovy-json-2.4.7.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\apache\httpcomponents\httpclient\4.5.2\httpclient-4.5.2.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\apache\httpcomponents\httpcore\4.4.4\httpcore-4.4.4.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.21\jcl-over-slf4j-1.7.21.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\apache\commons\commons-pool2\2.6.0\commons-pool2-2.6.0.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\slf4j\slf4j-api\1.7.16\slf4j-api-1.7.16.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\slf4j\slf4j-simple\1.7.16\slf4j-simple-1.7.16.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="user.script" value=""/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="sun.java.command" value="C:\Users\tomas.cejka.STYRAX\AppData\Local\Temp\surefire6017025946489266261\surefirebooter6670021813789310210.jar C:\Users\tomas.cejka.STYRAX\AppData\Local\Temp\surefire6017025946489266261 2018-11-23T23-15-35_780-jvmRun1 surefire6691725122885905540tmp surefire_05710534326256124489tmp"/>
+    <property name="user.timezone" value=""/>
+    <property name="surefire.test.class.path" value="S:\project\sdx\trunk\soap\soap.client\target\test-classes;S:\project\sdx\trunk\soap\soap.client\target\classes;C:\Users\tomas.cejka.STYRAX\.m2\repository\com\predic8\soa-model-core\1.6.0\soa-model-core-1.6.0.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\codehaus\groovy\groovy\2.4.7\groovy-2.4.7.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\codehaus\groovy\groovy-xml\2.4.7\groovy-xml-2.4.7.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\codehaus\groovy\groovy-json\2.4.7\groovy-json-2.4.7.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\apache\httpcomponents\httpclient\4.5.2\httpclient-4.5.2.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\apache\httpcomponents\httpcore\4.4.4\httpcore-4.4.4.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.21\jcl-over-slf4j-1.7.21.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\apache\commons\commons-pool2\2.6.0\commons-pool2-2.6.0.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\slf4j\slf4j-api\1.7.16\slf4j-api-1.7.16.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\tomas.cejka.STYRAX\.m2\repository\org\slf4j\slf4j-simple\1.7.16\slf4j-simple-1.7.16.jar;"/>
+    <property name="java.runtime.version" value="1.7.0_79-b15"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="sun.boot.class.path" value="S:\opt\jdk\jdk1.7.0_79\jre\lib\resources.jar;S:\opt\jdk\jdk1.7.0_79\jre\lib\rt.jar;S:\opt\jdk\jdk1.7.0_79\jre\lib\sunrsasign.jar;S:\opt\jdk\jdk1.7.0_79\jre\lib\jsse.jar;S:\opt\jdk\jdk1.7.0_79\jre\lib\jce.jar;S:\opt\jdk\jdk1.7.0_79\jre\lib\charsets.jar;S:\opt\jdk\jdk1.7.0_79\jre\lib\jfr.jar;S:\opt\jdk\jdk1.7.0_79\jre\classes"/>
+    <property name="surefire.real.class.path" value="C:\Users\tomas.cejka.STYRAX\AppData\Local\Temp\surefire6017025946489266261\surefirebooter6670021813789310210.jar"/>
+    <property name="java.endorsed.dirs" value="S:\opt\jdk\jdk1.7.0_79\jre\lib\endorsed"/>
+    <property name="maven.ext.class.path" value="S:\opt\netbeans_8.1\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="java.vm.version" value="24.79-b02"/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="java.version" value="1.7.0_79"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.ext.dirs" value="S:\opt\jdk\jdk1.7.0_79\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="os.version" value="6.1"/>
+    <property name="basedir" value="S:\project\sdx\trunk\soap\soap.client"/>
+    <property name="java.library.path" value="S:\opt\jdk\jdk1.7.0_79\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;c:\Program Files\Java\jdk1.8.0_162\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files (x86)\Common Files\Acronis\SnapAPI\;C:\Program Files (x86)\Acronis\CommandLineTool\;C:\Program Files\Git\bin;F:\Tools\apache-maven\apache-maven-3.3.9\bin;c:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Gow\bin;f:\Scripts\bin;F:\Tools\libressl-2.3.2-windows\x64;f:\Scripts\bin;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;f:\Tools\farmanager_v3.0;f:\Tools\cmder ;C:\Program Files (x86)\Windows Live\Shared;f:\Tools\python-3.5.3;f:\Tools\python-3.5.3\Scripts;f:\Tools\jbake-2.5.1\bin;C:\Program Files\OpenVPN\bin;C:\Program Files (x86)\Diffuse;C:\Users\tomas.cejka.STYRAX\AppData\Local\atom\bin;C:\Program Files\Docker Toolbox;C:\Program Files (x86)\Common Files\Acronis\TibMounter;."/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="user.country" value="CZ"/>
+  </properties>
+  <testcase name="testInfo" classname="cz.styrax.sdx.soap.client.WebServiceClientFactoryTest" time="1.704"/>
+  <testcase name="testCreatePort" classname="cz.styrax.sdx.soap.client.WebServiceClientFactoryTest" time="0.312"/>
+  <testcase name="testCreateService" classname="cz.styrax.sdx.soap.client.WebServiceClientFactoryTest" time="0.136"/>
+</testsuite>

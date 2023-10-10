@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<definitions 
+    name="AmIntrNtfWS" 
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://am.sodexo.cz/intr/ntf/service"
+    targetNamespace="http://am.sodexo.cz/intr/ntf/service">
+    <types>
+        <xsd:schema>
+            <!--xsd:import namespace="http://cmn.sodexo.cz/type/common" schemaLocation="common.001.001.01.xsd"/-->
+            <xsd:import namespace="http://am.sodexo.cz/intr/ntf/service" schemaLocation="am.intr.ntf.service.001.001.01.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="NotificationDataOutMsgRes">
+        <part element="tns:NotificationDataResultResponse" name="parameters">
+        </part>
+    </message>
+    <message name="NotificationDataInMsgRes">
+        <part element="tns:NotificationDataResultRequest" name="parameters">
+        </part>
+    </message>
+    <message name="NotificationDataInMsgReq">
+        <part element="tns:NotificationDataRequest" name="parameters">
+        </part>
+    </message>
+    <message name="NotificationDataOutMsgReq">
+        <part element="tns:NotificationDataResponse" name="parameters">
+        </part>
+    </message>
+    <portType name="AmIntrNtfmWSPortType">
+        <operation name="NtfmEventDataRequest">
+            <documentation>Interface for processing NTFC 1.</documentation>
+            <input message="tns:NotificationDataInMsgReq" name="in1">
+                <documentation>Request/input data for processing requestEventData operation</documentation>
+            </input>
+            <output message="tns:NotificationDataOutMsgReq" name="out1">
+                <documentation>Response/output data after processing requestEventData operation</documentation>
+            </output>
+        </operation>
+        <operation name="NtfmEventDataResponse">
+            <documentation>Interface for processing NTFC 2.</documentation>
+            <input message="tns:NotificationDataInMsgRes" name="in2">
+                <documentation>Request/input data for processing response requestEventData operation</documentation>
+            </input>
+            <output message="tns:NotificationDataOutMsgRes" name="out2">
+                <documentation>Response/output data after processing response requestEventData operation</documentation>
+            </output>
+        </operation>
+    </portType>
+    <binding name="AmIntrNtfmWSBinding" type="tns:AmIntrNtfmWSPortType">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"></soap12:binding>
+        <operation name="NtfmEventDataRequest">
+            <soap12:operation soapAction="NtfmEventDataRequest" soapActionRequired="false" style="document"></soap12:operation>
+            <input name="in1">
+                <soap12:body use="literal"></soap12:body>
+            </input>
+            <output name="out1">
+                <soap12:body use="literal"></soap12:body>
+            </output>
+        </operation>
+        <operation name="NtfmEventDataResponse">
+            <soap12:operation soapAction="NtfmEventDataResponse" soapActionRequired="false" style="document"></soap12:operation>
+            <input name="in2">
+                <soap12:body use="literal"></soap12:body>
+            </input>
+            <output name="out2">
+                <soap12:body use="literal"></soap12:body>
+            </output>
+        </operation>
+    </binding>
+    <service name="AmIntrNtfmWSService">
+        <port binding="tns:AmIntrNtfmWSBinding" name="AmIntrNtfmWSPort">
+            <documentation>Neco jako dokumentace</documentation>
+            <soap12:address location="http://172.16.6.20:8080/am.ws/AmIntrNtfmWSService/AmIntrNtfmWS"></soap12:address>
+        </port>
+    </service>
+</definitions>

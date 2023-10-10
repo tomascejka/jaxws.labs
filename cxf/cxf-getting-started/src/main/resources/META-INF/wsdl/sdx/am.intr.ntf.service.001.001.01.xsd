@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<xs:schema version="1.0"
+           xmlns="http://am.sodexo.cz/intr/ntf/service"
+           xmlns:cmn="http://cmn.sodexo.cz/type/common"
+           xmlns:tp="http://am.sodexo.cz/intr/ntf/type"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+           elementFormDefault="qualified" 
+           targetNamespace="http://am.sodexo.cz/intr/ntf/service">
+
+    <xs:import namespace="http://cmn.sodexo.cz/type/common" schemaLocation="common.001.001.01.xsd"/>
+    <xs:import namespace="http://am.sodexo.cz/intr/ntf/type" schemaLocation="am.intr.ntf.type.001.001.01.xsd"/>
+    
+    <xs:element name="NotificationDataRequest" type="NotificationDataRequestType">
+        <xs:annotation>
+            <xs:documentation>Asynchronní žádost o vytvoření dat pro daný typ notifikace pro danou společnost a případně i zaměstnance nebo produkt.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="NotificationDataRequestType">
+        <xs:annotation>
+            <xs:documentation>Žádost o data pro notifikační zprávy</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="cmn:CommonRequest">
+                <xs:sequence>
+                    <xs:element name="ExtReqId" type="cmn:ExtId">
+                        <xs:annotation>
+                            <xs:documentation>Externí id požadavku</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="NotificationType" type="tp:NotificationType">
+                        <xs:annotation>
+                            <xs:documentation>Typ notifikace, pro který je žádáno o data. </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="Company" type="cmn:CompanyCode">
+                        <xs:annotation>
+                            <xs:documentation>Kód společnosti, pro kterou je žádáno o data. </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Employee" type="cmn:EmployeeCode">
+                        <xs:annotation>
+                            <xs:documentation>Kód zaměstnance, pro kterého je žádáno o data (pokud se jedná o žádost na zaměstnance a ne na společnost). </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="ProductType" type="tp:ProductType">
+                        <xs:annotation>
+                            <xs:documentation>Typ produktu, pro který je žádáno o data, pokud má význam. </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <!--  stránkování pro velká data	-->
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:element name="NotificationDataResponse" type="NotificationDataResponseType">
+        <xs:annotation>
+            <xs:documentation>Synchronní odpověď na žádost, že žádost byla přijata a zahájeno zpracování dat, resp. chybový kód, proč byla žádost zamítnuta.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="NotificationDataResponseType">
+        <xs:annotation>
+            <xs:documentation>Odpověď na žádost o data</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="cmn:CommonResponse"></xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="NotificationDataResultRequest" type="NotificationDataResultRequestType">
+        <xs:annotation>
+            <xs:documentation>Žádost o načtení připravených dat pro notifikace</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="NotificationDataResultRequestType">
+        <xs:annotation>
+            <xs:documentation>Žádost o přečtení výsledku</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="cmn:CommonRequest">
+                <xs:sequence>
+                    <xs:element name="ExtReqId" type="cmn:ExtId">
+                        <xs:annotation>
+                            <xs:documentation>Identifikátor žádosti o data</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="NotificationDataResultResponse" type="NotificationDataResultResponseType">
+        <xs:annotation>
+            <xs:documentation>Odpověď obsahuje buď vytvořená data v attachmentu a nebo případně odpoveď, že data zatím ještě nebyla vytvořena nebo chybový kód.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="NotificationDataResultResponseType">
+        <xs:annotation>
+            <xs:documentation>Odpověď na žádost o přečtení výsledku</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="cmn:CommonResponse">
+                <xs:sequence minOccurs="0">
+                    <xs:element name="ResponseHolder" type="xs:base64Binary" xmime:expectedContentTypes="application/xml">
+                        <xs:annotation>
+                            <xs:documentation>Data jsou obsažena v attachmentu v elementu cmn:NotificationData, který se může libovolně opakovat.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+</xs:schema>

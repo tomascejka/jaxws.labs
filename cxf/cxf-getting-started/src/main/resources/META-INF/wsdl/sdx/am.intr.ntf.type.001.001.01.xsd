@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<xs:schema version="1.0"
+           xmlns="http://am.sodexo.cz/intr/ntf/type"
+           xmlns:cmn="http://cmn.sodexo.cz/type/common"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+           elementFormDefault="qualified" 
+           targetNamespace="http://am.sodexo.cz/intr/ntf/type">
+
+    <xs:simpleType name="NotificationType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"></xs:minLength>
+            <xs:maxLength value="100"></xs:maxLength>
+            <xs:pattern value="[A-Z0-9_]{1,100}"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProductType">
+        <xs:annotation>
+            <xs:documentation>Typ produktu - interni vlastnost notifikace</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACCOUNT_APC"></xs:enumeration>
+            <xs:enumeration value="ACCOUNT_GPC"></xs:enumeration>
+            <xs:enumeration value="ACCOUNT_FPC"></xs:enumeration>
+            <xs:enumeration value="ACCOUNT_CAF"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>    
+</xs:schema>
